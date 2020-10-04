@@ -1,6 +1,6 @@
 <head>
     <style> body { margin: 0; } </style>
-    <link rel="stylesheet" href="Globe.css">
+    <link rel="stylesheet" href="./globeTest.css">
     <script src="//unpkg.com/react@16/umd/react.production.min.js"></script>
     <script src="//unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="//unpkg.com/babel-standalone"></script>
@@ -13,7 +13,28 @@
   
   <body>
   <div id="globeViz"></div>
-  
+  <div class="top-info-container">
+    <div class="title">COVID-19</div>
+  </div>
+  <div class="bottom-info-container">
+    <div style="display: flex; justify-content: center;">
+      <div class="timeline-container">
+        
+        <span
+          style="font-size: 14px; color: #ccd6f6;"
+          class="slider-date"
+        ></span>
+      </div>
+    </div>
+    <div style="font-size: 14px; color: #ccd6f6; margin-top: 35px;">
+      Total Counts <span class="updated"></span>
+    </div>
+    <div style="color: #e6f1ff; padding: 0 5px;">
+      INFECTED: <span id="infected">0</span> • DEATHS:
+      <span id="deaths">0</span> • RECOVERED: <span id="recovered">0</span>
+    </div>
+  </div>
+
   <script type="text/jsx">
     const { useState, useEffect, useMemo } = React;
     let world={
@@ -77,8 +98,7 @@
           colorScale.domain([0, maxVal]);
          
   
-  
-  
+
           const FLAG_ENDPOINT='https://disease.sh/assets/img/flags';
           function getFlagName(d: any) {
               switch (d.ADMIN) {

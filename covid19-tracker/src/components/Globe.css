@@ -3,6 +3,49 @@
   margin: 0;
   padding: 0;
 }
+.top-info-container {
+  z-index: 1;
+  top: 20px;
+  position: relative;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+.Canvas_Container{
+  background-image: url('https://unpkg.com/three-globe@2.9.0/example/img/night-sky.png');
+}
+.bottom-info-container {
+  padding-bottom:40px;
+
+  z-index: 1;
+  color: white;
+  text-align:center;
+  width: 100%;
+  flex:none;
+}
+
+.title {
+  font-size: 35px;
+  color: #e6f1ff;
+}
+
+.title-desc {
+  margin-top: 5px;
+  color: #ccd6f6;
+  padding: 0 5px;
+}
+
+#infected {
+  color: goldenrod;
+}
+
+#deaths {
+  color: #ff4848;
+}
+
+#recovered {
+  color: #1ae021;
+}
 .card {
     font-family: "Space Mono", monospace;
     transition: 0.3s;

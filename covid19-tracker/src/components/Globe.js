@@ -2,18 +2,19 @@ import React,{ useState, useEffect, useMemo,useRef } from 'react';
 import Globe from 'react-globe.gl';
 import * as d3 from 'd3';
 import {getPolygonLabel} from './Label';
+import TimeLine from './AdditonalInfo';
 import './Globe.css';
-import { scaleQuantize } from 'd3';
+
 
 const World = (props)=>{
   const globeEl = useRef();
   const [countries, setCountries] = useState({ features: []});
     const [hoverD, setHoverD] = useState();
     const [dimension,setDimension] = useState({width:window.innerWidth,height:window.innerHeight})
-
+    const [worldTotal,setTotal] = useState({infected:0, deaths:0,recovered:0})
     useEffect(() => {
+
         window.addEventListener('resize', () => {
-          console.log(window.innerWidth);
           setDimension({width:window.innerWidth,height:window.innerHeight});
         });
         globeEl.current.controls().autoRotate = true;
@@ -22,9 +23,10 @@ const World = (props)=>{
       let covidData = await fetch("https://corona.lmao.ninja/v2/countries").then(res=>res.json());
       
       let data = await fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson').then(res => res.json());
-      console.log(data);
+      let totalDeaths=0,totalCases=0,recoveries =0;
       let covid = new Map();
       covidData.forEach(value=>{
+
           covid.set(value.countryInfo.iso2,{
               iso2:value.countryInfo.iso2,
               totalCases: value.cases,
@@ -46,13 +48,18 @@ const World = (props)=>{
             array[i].properties.totalDeaths = found.totalDeaths;
             array[i].properties.recoveries = found.recoveries;
             array[i].properties.activeCases = found.activeCases;
+            totalCases+=Number(found.totalCases);
+            totalDeaths+=Number(found.totalDeaths);
+            recoveries+=Number(found.recoveries);
         }
         })
-      setCountries(data);}
+      
+      setCountries(data);
+      setTotal({infected:totalCases,deaths:totalDeaths,recovered:recoveries});
+    }
 
       fetchData();
     }, []);
-    
         // Getting the scale small enough so the globe looks nicer
         const getVal = feat => {
             return Math.pow(feat.properties.activeCases / feat.properties.POP_EST, 1 / 4);
@@ -74,7 +81,12 @@ const World = (props)=>{
                 return d.ISO_A2.toLowerCase();
             }
           }
-        return <Globe
+        return (
+        <div className="Canvas_Container">
+          <div class="top-info-container">
+      <div class="title">COVID-19 GLOBE TRACKER</div>
+    </div>
+        <Globe
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
           backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
           width={dimension.width}
@@ -92,7 +104,10 @@ const World = (props)=>{
   }}
           onPolygonHover={setHoverD}
           polygonsTransitionDuration={300}
-        />;
+        />
+        <TimeLine infected={worldTotal.infected} deaths={worldTotal.deaths} recovered={worldTotal.recovered}/>
+       </div>
+        );
 
 }
 
