@@ -3,6 +3,7 @@ import Globe from 'react-globe.gl';
 import {getPolygonLabel} from './Label';
 import * as d3 from 'd3'
 import TimeLine from './AdditonalInfo';
+import Spinner from './Spinner';
 import './Globe.css';
 
 
@@ -12,6 +13,8 @@ const World = (props)=>{
     const [hoverD, setHoverD] = useState();
     const [dimension,setDimension] = useState({width:window.innerWidth,height:window.innerHeight})
     const [worldTotal,setTotal] = useState({infected:0, deaths:0,recovered:0})
+    const [loading,setLoading] =useState(false);
+
     useEffect(() => {
 
         window.addEventListener('resize', () => {
@@ -56,6 +59,7 @@ const World = (props)=>{
       
       setCountries(data);
       setTotal({infected:totalCases,deaths:totalDeaths,recovered:recoveries});
+      setLoading(true);
     }
 
       fetchData();
@@ -83,9 +87,9 @@ const World = (props)=>{
           }
         return (
         <div className="Canvas_Container">
-          <div class="top-info-container">
-      <div class="title">COVID-19 GLOBE TRACKER</div>
-    </div>
+          <div className="top-info-container">
+      <div className="title">COVID-19 GLOBE TRACKER</div>
+    </div>{loading ? null : <Spinner/> }
         <Globe
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
           backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"

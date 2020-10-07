@@ -1,0 +1,172 @@
+<head>
+    <style> body { margin: 0; } </style>
+    <link rel="stylesheet" href="./Globe.css">
+    <script src="//unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="//unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="//unpkg.com/babel-standalone"></script>
+  
+    <script src="//unpkg.com/d3"></script>
+  
+    <script src="//unpkg.com/react-globe.gl"></script>
+    <!--<script src="../../dist/react-globe.gl.js"></script>-->
+  </head>
+  
+  <body>
+  <div id="globeViz"></div>
+  <div class="top-info-container">
+    <div class="title">COVID-19</div>
+  </div>
+  <div class="bottom-info-container">
+    <div style="display: flex; justify-content: center;">
+      <div class="timeline-container">
+        
+        <span
+          style="font-size: 14px; color: #ccd6f6;"
+          class="slider-date"
+        ></span>
+      </div>
+    </div>
+   
+    <div style="font-size: 14px; color: #ccd6f6; margin-top: 35px;">
+      Total Counts <span class="updated"></span>
+    </div>
+    <div style="color: #e6f1ff; padding: 0 5px;">
+      INFECTED: <span id="infected">0</span> • DEATHS:
+      <span id="deaths">0</span> • RECOVERED: <span id="recovered">0</span>
+    </div>
+  </div>
+
+  <script type="text/jsx">
+    const { useState, useEffect, useMemo } = React;
+    let world={
+      width: window.innerWidth,
+      height:window.innerHeight
+    }
+    const World = () => {
+      const [countries, setCountries] = useState({ features: []});
+      const [hoverD, setHoverD] = useState();
+      const [dimension,setDimension] = useState({width:window.innerWidth,height:window.innerHeight})
+      const [loading,setLoading] =useState(false);
+      
+      useEffect(() => {
+        window.addEventListener('resize', () => {
+            setDimension({width:window.innerWidth,height:window.innerHeight});
+          });
+
+       const fetchData= async() =>{
+          // load data
+        let covidData = await fetch('https://corona.lmao.ninja/v2/countries').then(res=>res.json());
+        let data = await fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
+        .then(res => res.json());
+        let covid = new Map();
+        covidData.forEach(value=>{
+            covid.set(value.countryInfo.iso2,{
+                iso2:value.countryInfo.iso2,
+                totalCases: value.cases,
+                totalDeaths:value.deaths,
+                recoveries:value.recovered,
+                activeCases:value.active
+            })
+        })
+        data.features.forEach((value,i,array)=>{
+          let found = covid.get(array[i].properties.ISO_A2)
+          if(found==undefined){
+              array[i].properties.totalCases = 0;
+              array[i].properties.totalDeaths = 0;
+              array[i].properties.recoveries = 0;
+              array[i].properties.activeCases = 0;
+          }
+          else{
+              array[i].properties.totalCases = found.totalCases;
+              array[i].properties.totalDeaths = found.totalDeaths;
+              array[i].properties.recoveries = found.recoveries;
+              array[i].properties.activeCases = found.activeCases;
+          }
+          })
+        setCountries(data);
+        setLoading(true)
+        };
+        fetchData()
+      }, []);
+      
+          // Getting the scale small enough so the globe looks nicer
+          const getVal = feat => {
+              return Math.pow(feat.properties.activeCases / feat.properties.POP_EST, 1 / 4);
+          }    
+          const maxVal = useMemo(
+        () => Math.max(...countries.features.map(getVal)),
+        [countries]
+      );
+          const colorScale = d3.scaleSequential(d3.interpolateReds)
+          //d3.scaleThreshold(d3.range(minVal, maxVal, Math.round((maxVal - minVal) / 8)), d3.schemeReds[9]);
+          colorScale.domain([0, maxVal]);
+         
+  
+
+          const FLAG_ENDPOINT='https://disease.sh/assets/img/flags';
+          function getFlagName(d: any) {
+              switch (d.ADMIN) {
+                case "France":
+                  return "fr";
+                case "Norway":
+                  return "no";
+                default:
+                  return d.ISO_A2.toLowerCase();
+              }
+            }
+  
+         function getPolygonLabel(flagName, d) {
+              return `
+                    <div class="card">
+                      <img class="card-img" src="${FLAG_ENDPOINT}/${flagName}.png" alt="flag" />
+                      <div class="container">
+                         <span class="card-title"><b>${d.NAME}</b></span> <br />
+                         <div class="card-spacer"></div>
+                         <hr />
+                         <div class="card-spacer"></div>
+                         <span>Cases: ${d.totalCases}</span>  <br />
+                         <span>Deaths: ${d.totalDeaths}</span> <br />
+                         <span>Recovered: ${d.recoveries}</span> <br />
+                         <span>Active: ${d.activeCases}</span>  <br />
+                         <span>Population: ${d3.format(".3s")(d.POP_EST)}</span>
+                      </div>
+                    </div>
+                  `;
+          }
+          function getSpinner() {
+            return (
+              <div className="spinbody">
+                <div className="spinner"></div>
+                <p style={{ position: "absolute", left: "40%", bottom: "50px" }}></p>
+              </div>
+            )
+          }
+  
+          return (<div>{loading ? null : getSpinner() }
+            <Globe
+            globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+            backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+            showAtmosphere={false}
+            width={dimension.width}
+            height={dimension.height}
+            polygonsData={countries.features}
+            polygonAltitude={d => d === hoverD ? 0.12 : 0.06}
+            polygonCapColor={d => d === hoverD ? '#eceac4' : colorScale(getVal(d))}
+            polygonSideColor={() => 'rgba(0, 100, 0, 0.15)'}
+            polygonStrokeColor={() => '#111'}
+            polygonLabel={({ properties: d }) => {
+              const flagName = getFlagName(d);
+              return getPolygonLabel(flagName, d);
+            }}
+            onPolygonHover={setHoverD}
+            polygonsTransitionDuration={300}
+          /> 
+          </div>);
+      };
+  
+    ReactDOM.render(
+      <World />,
+      document.getElementById('globeViz')
+    );
+  </script>
+  </body>
