@@ -1,25 +1,23 @@
 import React from 'react';
-import Navbar from './components/Navbar';
 import './App.css';
-import Home from './components/pages/Home';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Services from './components/pages/Services';
-import Products from './components/pages/Products';
-import SignUp from './components/pages/SignUp';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Home from './pages';
+import SigninPage from './pages/signin';
+import GlobePage from './pages/globe';
+import TicTacToePage from './pages/tictactoe';
+import AboutUsPage from './pages/about';
 
 function App() {
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/services' component={Services} />
-          <Route path='/products' component={Products} />
-          <Route path='/sign-up' component={SignUp} />
-        </Switch>
-      </Router>
-    </>
+    <Router>
+      <Switch>
+        <Route path="/" component={Home} exact />
+        <Route path="/signin" component={SigninPage} exact />
+        <Route path="/globe" component={GlobePage} exact />
+        <Route path="/tictactoe" component={TicTacToePage} exact />
+        <Route path="/aboutUs" component={AboutUsPage} exact />
+      </Switch>
+    </Router>
   );
 }
 
