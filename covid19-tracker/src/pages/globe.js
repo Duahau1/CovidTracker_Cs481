@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import Footer from '../components/Footer';
-import HeroSection from '../components/HeroSection';
+import World from '../components/Globe/Globe';
 import Navbar from '../components/Navbar'
 import ScrollToTop from '../components/ScrollToTop';
 import Sidebar from '../components/Sidebar'
-//import World from '../components/Globe';
 
 const GlobePage = () => {
    
@@ -19,8 +18,7 @@ const GlobePage = () => {
             <ScrollToTop />
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <Navbar toggle={toggle}/>
-            {/* <World /> */}
-            <h1>This is the Globe Page</h1>
+            <World />
             <Footer/>
         </>
     )

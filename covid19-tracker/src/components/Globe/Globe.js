@@ -1,7 +1,7 @@
-import React,{ useState, useEffect, useMemo,useRef } from 'react';
+import React, {useState, useEffect, useMemo, useRef} from 'react'
 import Globe from 'react-globe.gl';
-import * as d3 from 'd3';
 import {getPolygonLabel} from './Label';
+import * as d3 from 'd3'
 import TimeLine from './AdditonalInfo';
 import './Globe.css';
 
@@ -37,7 +37,7 @@ const World = (props)=>{
       })
       data.features.forEach((value,i,array)=>{
         let found = covid.get(array[i].properties.ISO_A2)
-        if(found==undefined){
+        if(found===undefined){
             array[i].properties.totalCases = 0;
             array[i].properties.totalDeaths = 0;
             array[i].properties.recoveries = 0;
