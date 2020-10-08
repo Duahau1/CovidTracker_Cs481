@@ -15,6 +15,7 @@
     background-image: url('https://unpkg.com/three-globe@2.9.0/example/img/night-sky.png');
     z-index:1;
     position: relative;
+    overflow:hidden;
   }
   .bottom-info-container {
     z-index: 1;
