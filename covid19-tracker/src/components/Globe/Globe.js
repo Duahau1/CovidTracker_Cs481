@@ -5,7 +5,7 @@ import * as d3 from 'd3'
 import TimeLine from './AdditonalInfo';
 import Spinner from './Spinner';
 import './Globe.css';
-
+import Modal from '../Modal/Modal.js';
 
 const World = (props)=>{
   const globeEl = useRef();
@@ -14,7 +14,9 @@ const World = (props)=>{
     const [dimension,setDimension] = useState({width:window.innerWidth,height:window.innerHeight})
     const [worldTotal,setTotal] = useState({infected:0, deaths:0,recovered:0})
     const [loading,setLoading] =useState(false);
-
+    const [modalState,setModalState] = useState(false);
+    const [data,setData] =useState([]);
+    const [countryInfo, setCountryInfo] = useState({name:'',caseperM:0,deathsperM:0,totalCase:0,testperM:0});
     useEffect(() => {
 
         window.addEventListener('resize', () => {
@@ -35,7 +37,10 @@ const World = (props)=>{
               totalCases: value.cases,
               totalDeaths:value.deaths,
               recoveries:value.recovered,
-              activeCases:value.active
+              activeCases:value.active,
+              deathsPerOneMillion:value.deathsPerOneMillion,
+              casesPerOneMillion:value.casesPerOneMillion,
+              testsPerOneMillion:value.testsPerOneMillion
           })
       })
       data.features.forEach((value,i,array)=>{
@@ -45,12 +50,18 @@ const World = (props)=>{
             array[i].properties.totalDeaths = 0;
             array[i].properties.recoveries = 0;
             array[i].properties.activeCases = 0;
+            array[i].properties.caseperM = 0;
+            array[i].properties.deathsperM =0;
+
         }
         else{
             array[i].properties.totalCases = found.totalCases;
             array[i].properties.totalDeaths = found.totalDeaths;
             array[i].properties.recoveries = found.recoveries;
             array[i].properties.activeCases = found.activeCases;
+            array[i].properties.caseperM = found.casesPerOneMillion;
+            array[i].properties.deathsperM = found.deathsPerOneMillion;
+            array[i].properties.testperM = found.testsPerOneMillion;
             totalCases+=Number(found.totalCases);
             totalDeaths+=Number(found.totalDeaths);
             recoveries+=Number(found.recoveries);
@@ -60,6 +71,7 @@ const World = (props)=>{
       setCountries(data);
       setTotal({infected:totalCases,deaths:totalDeaths,recovered:recoveries});
       setLoading(true);
+      setModalState(false);
     }
 
       fetchData();
@@ -85,11 +97,15 @@ const World = (props)=>{
                 return d.ISO_A2.toLowerCase();
             }
           }
+          function handleClose(){
+            setModalState(false);
+          }
         return (
-        <div className="Canvas_Container">
+        <div className="Canvas_Container" >
           <div className="top-info-container">
       <div className="title">COVID-19 GLOBE TRACKER</div>
     </div>{loading ? null : <Spinner/> }
+        <Modal show={modalState} handleClose={handleClose} name ={countryInfo}data={data}></Modal>
         <Globe
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
           backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
@@ -107,6 +123,11 @@ const World = (props)=>{
             return getPolygonLabel(flagName, d);
   }}
           onPolygonHover={setHoverD}
+          onPolygonClick={({ properties: d },e)=>{
+            setModalState(true);
+            setData([d.activeCases,d.totalDeaths,d.recoveries]);
+            setCountryInfo({name:d.ADMIN,caseperM:d.caseperM,deathsperM:d.deathsperM,totalCase:d.totalCases,testperM:d.testperM});
+          }}
           polygonsTransitionDuration={300}
         />
         <TimeLine infected={worldTotal.infected} deaths={worldTotal.deaths} recovered={worldTotal.recovered}/>
