@@ -8,15 +8,9 @@ function numberWithCommas(x){
 const TimeLine =(props)=>{
   return(
     <div className="bottom-info-container">
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-        <div className="timeline-container">
-          
-          <span
-            style={{fontSize: '14px', color: '#ccd6f6'}}
-            className="slider-date"
-          ></span>
-        </div>
-      </div>
+       <span className="gradient-container">
+      LOW<div className="gradient"></div>HIGH
+      </span>
       <div style={{fontSize: '24px', color: '#ccd6f6' ,marginTop: '35px'}}>
         Total Counts <span className="updated"></span>
       </div>
