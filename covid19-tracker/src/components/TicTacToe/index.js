@@ -150,9 +150,8 @@ class Board extends React.Component {
         </span>
       )
       const winnerName = "winner-".concat(i);
-      const nextMove = "next-".concat(i);
       spans.push(<span id={winnerName} className="winner-marker"></span>)
-      spans.push(<span id={nextMove} className="next-move"></span>)
+
       if (i % 3 === 2) {
         spans.push(<div></div>);
       }
