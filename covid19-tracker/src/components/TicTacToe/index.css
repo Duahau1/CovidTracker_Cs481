@@ -1,5 +1,4 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
 }
 
@@ -22,6 +21,7 @@ span {
 }
 
 .square {
+  font-family: Futura, sans-serif !important;
   border: 2px solid black;
   background: white;
   float: left;
@@ -102,9 +102,11 @@ span {
 .single-game {
   margin: 10px;
   text-align: center;
+  padding: 6px;
 }
 
 .winner-marker {
+  font-family: Futura, sans-serif !important;
   visibility: hidden;
   font-size: 100px;
 }

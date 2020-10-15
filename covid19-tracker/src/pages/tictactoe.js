@@ -9,7 +9,7 @@ import Game from '../components/TicTacToe';
 const TicTacToePage = () => {
 
     const[isOpen, setIsOpen] = useState(false);
-    
+
     const toggle = () =>{
         setIsOpen(!isOpen)
     }
@@ -20,7 +20,6 @@ const TicTacToePage = () => {
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <Navbar toggle={toggle}/>
             <HeroSection />
-            <h1>This is the TicTacToe Page</h1>
             <Game />
             <Footer/>
         </>

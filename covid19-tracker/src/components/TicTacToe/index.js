@@ -61,10 +61,10 @@ class Board extends React.Component {
    * @param {int} squareNum The square in the game clicked
    */
   handleClick(innerGameId, squareNum) {
-    var outerGame = this.state.outerGame; 
+    var outerGame = this.state.outerGame;
 
     if (//NOT the current active inner game AND NOT a free move?
-        (innerGameId !== outerGame.activeInnerGameId && outerGame.activeInnerGameId !== 99) 
+        (innerGameId !== outerGame.activeInnerGameId && outerGame.activeInnerGameId !== 99)
   //SOME CHECKS BELOW THIS COMMENT MAY BE UNNECESSARY BASED ON LOGIC OF activeGameId, WILL TEST ONCE WORKING
         ||outerGame.winner //outer game won
         || outerGame.innerGames[innerGameId].winner //this inner game is won
@@ -73,7 +73,7 @@ class Board extends React.Component {
         return; //do nothing if shouldnt be able to click this button anymore
       }
 
- 
+
     //update the square that was clicked first
     outerGame.innerGames[innerGameId].squares[squareNum] = this.state.xIsNext ? 'X' : 'O';
     //then check if we have a winner after this current move
@@ -95,6 +95,7 @@ class Board extends React.Component {
     }else{
       outerGame.activeInnerGameId=squareNum;
     }
+    displayNextMove(innerGameId, outerGame.activeInnerGameId);
 
     this.setState({
       outerGame: outerGame,
@@ -149,8 +150,9 @@ class Board extends React.Component {
         </span>
       )
       const winnerName = "winner-".concat(i);
+      const nextMove = "next-".concat(i);
       spans.push(<span id={winnerName} className="winner-marker"></span>)
-
+      spans.push(<span id={nextMove} className="next-move"></span>)
       if (i % 3 === 2) {
         spans.push(<div></div>);
       }
@@ -205,7 +207,7 @@ function calcInnerWinner(innerGameSquares) {
 
 /**
  * Calculate the winner of the outer game, OVERALL WINNER
- * @param {*} outerGame 
+ * @param {*} outerGame
  */
 function calcOuterWinner(outerGame){
   //for each winning scenario
@@ -232,6 +234,20 @@ function disableInnerGame(gameId, winner) {
   const winnerMarker = document.getElementById(winnerId);
   winnerMarker.textContent = winner;
   winnerMarker.style.visibility = "visible";
+}
+
+function displayNextMove(previous, next) {
+  if (previous !== 99) {
+    const previousGame = document.getElementById(getGameId(previous));
+    previousGame.style.border = 'none';
+    previousGame.style.padding = '6px';
+  }
+
+  if (next !== 99) {
+    const nextGame = document.getElementById(getGameId(next));
+    nextGame.style.border = '3px solid #cb181d';
+    nextGame.style.padding = '3px';
+  }
 }
 
 /**
