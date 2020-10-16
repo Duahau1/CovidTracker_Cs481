@@ -14,10 +14,11 @@ BtnWrap,
 BtnLink,
 Img} from './contentElements'
 
-const ContentSection = ({
+const ContentSectionGlobe = ({
     lightBg, 
     id,
-    linkOne, 
+    linkOne,
+    linkTwo, 
     imgStart, 
     topLine, 
     lightText,
@@ -26,7 +27,8 @@ const ContentSection = ({
     description, 
     img, 
     alt, 
-    buttonLabel, 
+    buttonLabel,
+    buttonLabelTwo, 
     primary, 
     dark, 
     dark2}) => {
@@ -51,6 +53,16 @@ const ContentSection = ({
                             dark={dark ? 1 : 0}
                             dark2={dark2 ? 1 : 0}
                             >{buttonLabel}</BtnLink>
+                            <BtnLink to={linkTwo} 
+                            smooth={true}
+                            duration={500}
+                            spy={true}
+                            exact="true"
+                            offset={-80}
+                            primary={primary ? 1 : 0}
+                            dark={dark ? 1 : 0}
+                            dark2={dark2 ? 1 : 0}
+                            >{buttonLabelTwo}</BtnLink>
                         </BtnWrap>
                     </TextWrapper>
                     </Column1>
@@ -67,4 +79,4 @@ const ContentSection = ({
 }
 
 
-export default ContentSection
+export default ContentSectionGlobe

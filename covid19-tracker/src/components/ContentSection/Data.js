@@ -1,13 +1,15 @@
 export const homeObjectOne = {
     id: 'covid',
-    link: '/globe',
+    linkOne: '/globe',
+    linkTwo: '/usa',
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
     topLine: 'Covid 19',
     headline: 'Interactive Map',
     description: 'We can put any information here to help the user to interact with the map',
-    buttonLabel: 'Globe',
+    buttonLabel: 'Global Map',
+    buttonLabelTwo: 'USA Map',
     imgStart: false,
     img: require('../../images/covid1.jpg'),
     alt: 'Car',
@@ -17,7 +19,7 @@ export const homeObjectOne = {
 }
 export const homeObjectTwo = {
     id: 'tictactoe',
-    link: '/tictactoe',
+    linkOne: '/tictactoe',
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
@@ -34,7 +36,7 @@ export const homeObjectTwo = {
 }
 export const homeObjectThree = {
     id: 'about',
-    link: 'aboutUs',
+    linkOne: 'aboutUs',
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
