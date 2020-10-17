@@ -148,7 +148,7 @@ const World = (props)=>{
       </div> 
      {/* <input className="title" placeholder="INPUT a country" />*/}
     {search?<span>Type the country name, iso2, or iso3 and press enter</span>:null}
-    </div>{loading ? null : <Spinner/> }
+    </div>{loading ? null : <Spinner page={'globe'}/> }
         <Modal show={modalState} handleClose={handleClose} name ={countryInfo}data={data}></Modal>
         <Globe
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"

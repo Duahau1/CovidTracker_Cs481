@@ -49,7 +49,6 @@ let chartPlot = function (stateName) {
       .attr("y", d => yScale(dataset[0][1] / 1.5))
       .style("width", d => xScale.bandwidth())
       .attr("height", function(d) { return height - yScale(dataset[0][1] / 1.5)-padding; }) // always equal to 0
-
       .attr("data-date", (d, i) => (d[0]))
       .on('mouseover', (d, i) => {
         tooltip.style('opacity', 0.9);

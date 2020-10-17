@@ -1,7 +1,9 @@
 import React from 'react';
-function getSpinner() {
+import './Globe.css';
+function getSpinner(props) {
+    let spinnerClass = props.page==='usa'? "spinbodyUSA":"spinbody";
     return (
-      <div className="spinbody">
+      <div className={spinnerClass}>
         <div className="spinner"></div>
         <p style={{ position: "absolute", left: "40%", bottom: "50px" }}></p>
       </div>
