@@ -12,6 +12,7 @@ path {
     stroke:black;
     stroke-width: 1;
     fill: none;
+    cursor: pointer;
 }
 
 .first_component{
@@ -62,7 +63,7 @@ font-size: 1em;
     border-radius: 10px;
     z-index: 2;
     position: absolute;
-    transform: translate(-50%, -60%) scale(0.8);
+    transform: translate(-60%, -60%) scale(0.8);
   }
   
   .container-tool {

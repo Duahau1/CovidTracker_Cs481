@@ -1,11 +1,12 @@
-import React,{useState,useEffect,useRef} from 'react';
+import React,{useEffect,useRef} from 'react';
 import './Modal2.css'
 import * as d3 from "d3";
 
 const Chart =(props)=>{
     const ref=useRef(null);
     useEffect(()=>{
-    let url = `https://disease.sh/v3/covid-19/nyt/states/${props.stateName}`;
+    //let url = `https://disease.sh/v3/covid-19/nyt/states/${props.stateName}`;
+    let url =`https://covidtracker-lac.vercel.app/api/server?stateName=${props.stateName}`
     fetch(url).then((res) => {
         if (res.status >= 200 && res.status <= 299) {
           return res.json();
@@ -59,11 +60,9 @@ const Chart =(props)=>{
       .duration(800)
       .attr("y", function (d) { return yScale(d[1]); })
       .attr("height", function (d) { return height - yScale(d[1])-padding; })
-      .delay(function (d, i) { return (i * 100) })
+      .delay(function (d, i) { return (i * 50) })
       })
-    
-
-},[props.stateName])
+},[])
 return (
     <svg className="svg" ref={ref}></svg>
 )

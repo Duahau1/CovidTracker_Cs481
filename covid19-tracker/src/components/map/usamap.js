@@ -6,6 +6,7 @@ import fipsData from './fipstostate.json';
 import Tooltip from './tooltip';
 import Modal from '../Modal2/Modal';
 import Spinner from '../Globe/Spinner';
+
 const USAMap = () => {
   const ref = useRef(null);
   const [tooltip, setTool] = useState({ opacity: 0, data: {totalCases:0,totalDeaths:0,name:'',recoveries:0,activeCases:0}, left: 0, top: 0 })
@@ -13,7 +14,6 @@ const USAMap = () => {
   const [modalState,setModalState] = useState(false);
   const [stateData,setStateData] =useState();
   const [loading,setLoading] =useState(false);
-
   const COUNTY = "https://d3js.org/us-10m.v1.json";
   const EDU = "https://corona.lmao.ninja/v2/states";
   const pathGenerator = d3.geoPath();
@@ -23,17 +23,17 @@ const USAMap = () => {
   
 
   useEffect(() => {
-  
+    let selectedInterval ='';
     var svg = d3.select(ref.current).attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom]);
-    window.addEventListener('mousedown',()=>{
-
+    window.addEventListener('mousedown',()=>{ 
       setTool({ opacity: 0, data: {totalCases:0,totalDeaths:0,name:'',recoveries:0,activeCases:0}, left: 0, top: 0 });
-     
+      if(selectedInterval!==''){
+        d3.selectAll('path').style('opacity',1);
+        }
   })
     async function render() {
       let data = await fetch(COUNTY).then(res => res.json());
       let edu = await fetch(EDU).then(res => res.json());
-
       let map = new Map();
       let county = topojson.feature(data, data.objects.states)
       county.features.forEach((value, index, arr) => {
@@ -48,6 +48,10 @@ const USAMap = () => {
       })
       let max = edu.reduce((prev, curr) => Math.max(prev, curr.cases), edu[0].cases);
       let min = edu.reduce((prev, curr) => Math.min(prev, curr.cases), edu[0].cases);
+      legend({
+        color: d3.scaleThreshold(d3.range(min, max, Math.round((max - min) / 6)), d3.schemeReds[7]),
+        tickSize: 0,
+      })
       let threshold = d3.scaleThreshold().domain(d3.range(min, max, (max - min) / 6))
         .range(d3.schemeReds[7]);
       svg.selectAll('path').remove()
@@ -60,6 +64,14 @@ const USAMap = () => {
             return threshold(map.get(d.name)[0]);
           }
         })
+        .style('opacity', d => {
+          if (selectedInterval===''||map.get(d.name)[5] === selectedInterval) {
+              return 1;
+          }
+          else {
+              return 0.1;
+          }
+        })
         .on('click', (d, i) => {
           let arr = map.get(d.name);
           setTool({ opacity: 1, data: {totalCases:arr[0],totalDeaths:arr[1],name:arr[2].toLowerCase(),recoveries:arr[3],activeCases:arr[4]}, left: String((d3.event.pageX + 10) + "px"), top: (d3.event.pageY - 28) + "px" })
@@ -68,11 +80,83 @@ const USAMap = () => {
         setStateData(map);
         setLoading(true);
       }
+      function legend({
+        color,
+        title,
+        tickSize = 6,
+        width = 320,
+        height = 44 + tickSize,
+        marginTop = 18,
+        marginRight = 0,
+        marginBottom = 16 + tickSize,
+        marginLeft = 0,
+        ticks = width / 64,
+        tickFormat,
+        tickValues
+      } = {}) {
+        
+        let tickAdjust = g => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
+        let x;
+        // Threshold
+        if (color.invertExtent) {
+          const thresholds
+            = color.thresholds ? color.thresholds() // scaleQuantize
+              : color.quantiles ? color.quantiles() // scaleQuantile
+                : color.domain(); // scaleThreshold
+      
+          const thresholdFormat
+            = tickFormat === undefined ? d => d
+              : typeof tickFormat === "string" ? d3.format(tickFormat)
+                : tickFormat;
+      
+          x = d3.scaleLinear()
+            .domain([-1, color.range().length - 1])
+            .rangeRound([600, 860]);
+      
+          svg.append("g")
+            .attr('id','legend')
+            .selectAll("rect")
+            .data(color.range())
+            .join("rect")
+            .attr("x", (d, i) => x(i - 1))
+            .attr("y", marginTop)
+            .attr("width", (d, i) => x(i) - x(i - 1))
+            .attr("height", height - marginTop - marginBottom)
+            .attr("fill", d => d)
+            .attr('id',(d,i)=>'Bar_'+i)
+            .style('cursor', 'pointer')
+            .on('click', (d, i, arr) => {
+              selectedInterval=d;
+              render();
+            });
+          tickValues = d3.range(thresholds.length);
+          tickFormat = i => thresholdFormat(thresholds[i], i);
+        }
+        svg.append("g")
+          .attr("transform", `translate(0,${height - marginBottom})`)
+          .call(d3.axisBottom(x)
+            .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
+            .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
+            .tickSize(tickSize)
+            .tickValues(tickValues))
+          .call(tickAdjust)
+          .call(g => g.select(".domain").remove())
+          .call(g => g.append("text")
+            .attr("x", marginLeft)
+            .attr("y", marginTop + marginBottom - height - 6)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .attr("font-weight", "bold")
+            .text(title));
+            
+        return svg.node();
+      }
     render();
   }, [])
   
   function handleClick(){
-    if(stateData.get(search)!==undefined){
+    let tempSearch = search !==''?search[0].toUpperCase()+search.substring(1):'';
+    if(stateData.get(tempSearch)!==undefined){
       setModalState(true);
       document.getElementById("state").value = '';
     }
@@ -81,9 +165,7 @@ const USAMap = () => {
     }
   }
   function handleSearch(e){
- 
     setSearch(e.target.value);
-    
   }
   function handleEnter(e){
     if(e.key=='Enter'){
@@ -104,6 +186,7 @@ const USAMap = () => {
         </button>
         <Modal  show={modalState} stateName={search}  handleClose={handleClose} width={width} height={height}/>
       </div>
+      
       <svg className="usmap" ref={ref}></svg>
       {tooltip.opacity?<Tooltip data={tooltip.data} left={tooltip.left} top={tooltip.top} opacity={tooltip.opacity} />:null}
     </div>
