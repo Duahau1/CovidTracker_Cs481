@@ -6,8 +6,9 @@
     height: 100%;
     background-image: radial-gradient(rgb(74, 0, 0), rgb(0, 0, 0));
     z-index:3;
+    
   }
-  
+ 
   .modal-main {
     position: relative;
     width: 80%;
@@ -16,13 +17,15 @@
     left:50%;
     transform: translate(-50%,-50%);
     z-index:3;
-  
+   
   }
   
   .display-block {
     display: block;
   }
-  
+  ::-webkit-scrollbar {
+    display: none;
+}
   .display-none {
     display: none;
   }
@@ -36,6 +39,7 @@
     color: rgba(255,255,255,.8);
     font-size: 1em;
     border: #aaa;
+    padding-top:10px;
   }
   
   .modal_info{
@@ -59,6 +63,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    padding-top:10px;
   }
 
   #donut{
@@ -69,8 +74,7 @@
 
   }
   hr {
-    margin-top: 5px;
-    
+    margin-top: 5px;  
     border: 0;
     clear:both;
     display:block;

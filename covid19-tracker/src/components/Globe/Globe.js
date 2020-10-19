@@ -6,6 +6,7 @@ import TimeLine from './AdditonalInfo';
 import Spinner from './Spinner';
 import './Globe.css';
 import Modal from '../Modal/Modal.js';
+import {BsSearch} from 'react-icons/bs';
 
 const World = (props)=>{
   const globeEl = useRef();
@@ -17,6 +18,8 @@ const World = (props)=>{
     const [modalState,setModalState] = useState(false);
     const [data,setData] =useState([]);
     const [countryInfo, setCountryInfo] = useState({name:'',caseperM:0,deathsperM:0,totalCase:0,testperM:0});
+    const [search,setSearch] =useState(false);
+
     useEffect(() => {
 
         window.addEventListener('resize', () => {
@@ -52,7 +55,6 @@ const World = (props)=>{
             array[i].properties.activeCases = 0;
             array[i].properties.caseperM = 0;
             array[i].properties.deathsperM =0;
-
         }
         else{
             array[i].properties.totalCases = found.totalCases;
@@ -97,13 +99,55 @@ const World = (props)=>{
                 return d.ISO_A2.toLowerCase();
             }
           }
+        function handleSearch(){
+          if(document.getElementsByClassName('scene-tooltip')[0].style.display==''){
+            document.getElementsByClassName('scene-tooltip')[0].style.display="none";
+          }
+          else{
+            document.getElementsByClassName('scene-tooltip')[0].style.display='';
+
+          }
+          setSearch(!search);
+        }
+        async function handleCountrySearch(e){
+          if (e.key === 'Enter'){
+            let country_name = e.target.value.toLowerCase();
+           let country_data = await fetch(`https://disease.sh/v3/covid-19/countries/${country_name}`).then(
+            res=>{
+              if(res.status===404){
+                return 404;
+              }
+              return res.json()});
+           if(typeof country_data ==='number'){
+            document.getElementById('search_field').value="";
+           }
+           else{
+           setCountryInfo({
+            name:country_data.country,
+            caseperM:country_data.casesPerOneMillion,
+            deathsperM:country_data.deathsPerOneMillion,
+            totalCase:country_data.totalCases,
+            testperM:country_data.testsPerOneMillion
+          });
+           setModalState(true);
+           setData([country_data.active,country_data.deaths,country_data.recovered]);
+           document.getElementById('search_field').value="";
+            }
+          }
+        }
           function handleClose(){
             setModalState(false);
           }
         return (
         <div className="Canvas_Container" >
           <div className="top-info-container">
-      <div className="title">COVID-19 GLOBE TRACKER</div>
+     <div className="title">
+       {!search ?<p>COVID-19 GLOBE TRACKER</p>:<input id="search_field" onKeyDown={handleCountrySearch} placeholder="Search"/> 
+        }
+       <BsSearch onClick={handleSearch} className="search"></BsSearch>
+      </div> 
+     {/* <input className="title" placeholder="INPUT a country" />*/}
+    {search?<span>Type the country name, iso2, or iso3 and press enter</span>:null}
     </div>{loading ? null : <Spinner/> }
         <Modal show={modalState} handleClose={handleClose} name ={countryInfo}data={data}></Modal>
         <Globe
@@ -129,6 +173,9 @@ const World = (props)=>{
             setCountryInfo({name:d.ADMIN,caseperM:d.caseperM,deathsperM:d.deathsperM,totalCase:d.totalCases,testperM:d.testperM});
           }}
           polygonsTransitionDuration={300}
+          onGlobeClick={({ lat, lng }, event)=>{
+            globeEl.current.controls().autoRotateSpeed = !globeEl.current.controls().autoRotateSpeed;         
+           }}
         />
         <TimeLine infected={worldTotal.infected} deaths={worldTotal.deaths} recovered={worldTotal.recovered}/>
        </div>

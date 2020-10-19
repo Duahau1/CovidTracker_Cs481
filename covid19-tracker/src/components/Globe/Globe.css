@@ -29,8 +29,15 @@
   .title {
     font-size: 35px;
     color: #e6f1ff;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
   }
-  
+  .search{
+    margin:10px;
+    size: 32px;
+    cursor: pointer;
+  }
   .title-desc {
     margin-top: 5px;
     color: #ccd6f6;
@@ -68,6 +75,17 @@
       padding-right: 12px;
       text-align: left;
     }
+    #search_field{
+      background-color: rgba(0,0,0,0);
+      border: 0;
+      border-bottom: 1px solid #fff;
+      width: 250px;
+      font-size: 1em;
+      text-align: center;
+      color: #fff;
+      text-transform: uppercase; 
+    }
+    
     
     .card-img {
       object-fit: contain;
@@ -114,7 +132,9 @@
       top: 50%;
       transform: translate(-50%, -50%);
     }
-    
+    #tempinput{
+      z-index: 4;
+    }
     @media only screen and (min-device-width: 320px) and (max-device-width: 750px) {
       .spinner {
         left: 33%;

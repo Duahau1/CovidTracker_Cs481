@@ -23,8 +23,6 @@ const ModalContent = (props)=>{
         const group = d3.select(ref.current);
         const groupWithData = group.selectAll("g.arc").data(data);
         groupWithData.exit().remove();
-        console.log(numberWithCommas(props.data[0]));
-
         const groupWithUpdate = groupWithData
           .enter()
           .append("g")
