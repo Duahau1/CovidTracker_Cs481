@@ -5,8 +5,10 @@ import * as d3 from "d3";
 const Chart =(props)=>{
     const ref=useRef(null);
     useEffect(()=>{
-    //let url = `https://disease.sh/v3/covid-19/nyt/states/${props.stateName}`;
-    let url =`https://covidtracker-lac.vercel.app/api/server?stateName=${props.stateName}`
+    let mounting =true;
+    //let url =`https://covidtracker-lac.vercel.app/api/server?stateName=${props.stateName}`
+    if(mounting){
+    let url = `https://disease.sh/v3/covid-19/nyt/states/${props.stateName}`;
     fetch(url).then((res) => {
         if (res.status >= 200 && res.status <= 299) {
           return res.json();
@@ -54,7 +56,7 @@ const Chart =(props)=>{
           .attr("height", function(d) { return height - yScale(dataset[0][1] / 1.5)-padding; }) // always equal to 0
     
           .attr("data-date", (d, i) => (d[0]))
-          
+        
       subSvg.selectAll("rect")
       .transition()
       .duration(800)
@@ -62,7 +64,11 @@ const Chart =(props)=>{
       .attr("height", function (d) { return height - yScale(d[1])-padding; })
       .delay(function (d, i) { return (i * 50) })
       })
-},[])
+     }
+      return ()=>{
+        mounting=false;
+      }
+},[props.height,props.width,props.stateName])
 return (
     <svg className="svg" ref={ref}></svg>
 )

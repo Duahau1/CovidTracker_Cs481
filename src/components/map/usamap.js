@@ -8,30 +8,34 @@ import Modal from '../Modal2/Modal';
 import Spinner from '../Globe/Spinner';
 
 const USAMap = () => {
-  const ref = useRef(null);
+  let mapref = useRef(null);
+  const [dimension,setDimension] =useState({width:0, height:0});
   const [tooltip, setTool] = useState({ opacity: 0, data: {totalCases:0,totalDeaths:0,name:'',recoveries:0,activeCases:0}, left: 0, top: 0 })
   const [search,setSearch] = useState('');
   const [modalState,setModalState] = useState(false);
   const [stateData,setStateData] =useState();
   const [loading,setLoading] =useState(false);
-  const COUNTY = "https://d3js.org/us-10m.v1.json";
-  const EDU = "https://corona.lmao.ninja/v2/states";
-  const pathGenerator = d3.geoPath();
-  var margin = { top: 20, right: 20, bottom: 60, left: 50 };
-  var width = 975 - margin.left - margin.right;
-  var height = 610 - margin.top - margin.bottom;
+  
   
 
   useEffect(() => {
+    let mounted =true;
+      var margin = { top: 20, right: 20, bottom: 60, left: 50 };
+  var width = 975 - margin.left - margin.right;
+  var height = 610 - margin.top - margin.bottom;
+    const COUNTY = "https://d3js.org/us-10m.v1.json";
+    const EDU = "https://corona.lmao.ninja/v2/states";
+    setDimension({width,height})
     let selectedInterval ='';
-    var svg = d3.select(ref.current).attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom]);
+    var svg = d3.select(mapref.current).attr("viewBox", [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom]);
     window.addEventListener('mousedown',()=>{ 
       setTool({ opacity: 0, data: {totalCases:0,totalDeaths:0,name:'',recoveries:0,activeCases:0}, left: 0, top: 0 });
       if(selectedInterval!==''){
         d3.selectAll('path').style('opacity',1);
         }
-  })
+    })
     async function render() {
+      const pathGenerator = d3.geoPath();
       let data = await fetch(COUNTY).then(res => res.json());
       let edu = await fetch(EDU).then(res => res.json());
       let map = new Map();
@@ -41,17 +45,19 @@ const USAMap = () => {
       })
       edu.splice(51, 12);
       edu.forEach((value, index, arr) => {
-        if (value.state == "District Of Columbia") {
+        if (value.state === "District Of Columbia") {
           value.state = "District of Columbia";
         }
         map.set(value.state, [value.cases, value.deaths, value.state,value.recovered,value.active])
       })
       let max = edu.reduce((prev, curr) => Math.max(prev, curr.cases), edu[0].cases);
       let min = edu.reduce((prev, curr) => Math.min(prev, curr.cases), edu[0].cases);
+
       legend({
         color: d3.scaleThreshold(d3.range(min, max, Math.round((max - min) / 6)), d3.schemeReds[7]),
         tickSize: 0,
       })
+    
       let threshold = d3.scaleThreshold().domain(d3.range(min, max, (max - min) / 6))
         .range(d3.schemeReds[7]);
       svg.selectAll('path').remove()
@@ -59,7 +65,7 @@ const USAMap = () => {
         .attr('class', 'county')
         .attr('d', d => pathGenerator(d))
         .style('fill', d => {
-          if (map.get(d.name) != undefined) {
+          if (map.get(d.name) !== undefined) {
             map.get(d.name).push(threshold(map.get(d.name)[0]));
             return threshold(map.get(d.name)[0]);
           }
@@ -127,7 +133,9 @@ const USAMap = () => {
             .style('cursor', 'pointer')
             .on('click', (d, i, arr) => {
               selectedInterval=d;
+              if(mounted){
               render();
+              }
             });
           tickValues = d3.range(thresholds.length);
           tickFormat = i => thresholdFormat(thresholds[i], i);
@@ -151,7 +159,12 @@ const USAMap = () => {
             
         return svg.node();
       }
+      if(mounted){
     render();
+      }
+    return ()=>{
+      mounted =false;
+    }
   }, [])
   
   function handleClick(){
@@ -168,13 +181,13 @@ const USAMap = () => {
     setSearch(e.target.value);
   }
   function handleEnter(e){
-    if(e.key=='Enter'){
+    if(e.key==='Enter'){
       handleClick();
     }
   }
   function handleClose(){
     setModalState(false);
-    setSearch('')
+    setSearch('');
   }
   return (
     <div className="first_component">
@@ -184,10 +197,9 @@ const USAMap = () => {
           <button id="search" onClick={handleClick}>
             Search
         </button>
-        <Modal  show={modalState} stateName={search}  handleClose={handleClose} width={width} height={height}/>
+        <Modal  show={modalState} stateName={search}  handleClose={handleClose} width={dimension.width} height={dimension.height}/>
       </div>
-      
-      <svg className="usmap" ref={ref}></svg>
+      <svg className="usmap" ref={mapref}></svg>
       {tooltip.opacity?<Tooltip data={tooltip.data} left={tooltip.left} top={tooltip.top} opacity={tooltip.opacity} />:null}
     </div>
   )

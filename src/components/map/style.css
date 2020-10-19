@@ -1,4 +1,4 @@
-path:hover{
+.county:hover{
     stroke:black;
     stroke-opacity: 2;
 }
@@ -8,10 +8,9 @@ path:hover{
     height:50%;
 }
 
-path {
+.county {
     stroke:black;
     stroke-width: 1;
-    fill: none;
     cursor: pointer;
 }
 

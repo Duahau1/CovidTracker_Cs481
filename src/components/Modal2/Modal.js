@@ -4,7 +4,6 @@ import ModelContent from './Modal_Content';
 const Modal = ({ handleClose, show, width,stateName,height}) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
   let alterStateName =stateName!==''?stateName[0].toUpperCase()+stateName.substring(1):'';
-  
   let close ="< Go Back";
   return (
     <div className={showHideClassName}>

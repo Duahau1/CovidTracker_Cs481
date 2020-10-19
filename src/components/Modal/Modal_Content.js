@@ -47,8 +47,9 @@ const ModalContent = (props)=>{
           .attr("alignment-baseline", "middle")
           .attr("transform", d => `translate(${createArc.centroid(d)})`)
           .style("fill", "white")
+  
       },
-      [props.data]
+      [props.data,colors, createArc,createPie]
     );
 return (
 <div className="panel">

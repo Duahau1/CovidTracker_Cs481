@@ -21,7 +21,8 @@ const World = (props)=>{
     const [search,setSearch] =useState(false);
 
     useEffect(() => {
-
+        let mounted =true;
+        
         window.addEventListener('resize', () => {
           setDimension({width:window.innerWidth,height:window.innerHeight});
         });
@@ -74,9 +75,14 @@ const World = (props)=>{
       setTotal({infected:totalCases,deaths:totalDeaths,recovered:recoveries});
       setLoading(true);
       setModalState(false);
+    
     }
-
+    if (mounted){
       fetchData();
+    }
+    return ()=>{
+      mounted=false;
+    }
     }, []);
         // Getting the scale small enough so the globe looks nicer
         const getVal = feat => {
@@ -100,7 +106,7 @@ const World = (props)=>{
             }
           }
         function handleSearch(){
-          if(document.getElementsByClassName('scene-tooltip')[0].style.display==''){
+          if(document.getElementsByClassName('scene-tooltip')[0].style.display===''){
             document.getElementsByClassName('scene-tooltip')[0].style.display="none";
           }
           else{
