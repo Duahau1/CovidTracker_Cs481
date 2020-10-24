@@ -58,7 +58,6 @@ body {
 
 #zero, #winner-0, #one, #winner-1, #two, #winner-2 {
   grid-row: 2;
-  color: yellow;
 }
 
 #three, #winner-3, #four, #winner-4, #five, #winner-5 {
