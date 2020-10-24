@@ -1,9 +1,6 @@
-ol, ul {
-  padding-left: 30px;
-}
-
-span {
-  display: inline-block;
+body {
+  background: black;
+  color: white;
 }
 
 .board-row:after {
@@ -13,13 +10,18 @@ span {
 }
 
 .status {
-  margin-bottom: 10px;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 7px 15px;
+  background: #cb181d;
+  border-radius: 5px;
+  width: max-content;
 }
 
 .square {
   font-family: Futura, sans-serif !important;
-  border: 2px solid black;
-  background: white;
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.0);
   float: left;
   font-size: 24px;
   font-weight: bold;
@@ -30,11 +32,12 @@ span {
   padding: 0;
   text-align: center;
   width: 34px;
+  color: white;
 }
 
 .square:disabled {
-  background: #cccccc;
-  border-color: #adadad;
+  color: #757272;
+  border-color: #757272;
 }
 
 .zero, .three, .six {
@@ -55,6 +58,7 @@ span {
 
 #zero, #winner-0, #one, #winner-1, #two, #winner-2 {
   grid-row: 2;
+  color: yellow;
 }
 
 #three, #winner-3, #four, #winner-4, #five, #winner-5 {
@@ -86,23 +90,36 @@ span {
 }
 
 .game {
-  display: flex;
+  margin-top: 100px;
+  display: inline-block;
   flex-direction: row;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
 }
 
 .game-board {
   display: grid;
   text-align: center;
+  margin: auto;
+  width: max-content;
+}
+
+#game-board {
+  display: inline-block;
 }
 
 .single-game {
   margin: 10px;
   text-align: center;
   padding: 6px;
+  border-radius: 5px;
 }
 
 .winner-marker {
+  margin-top: 10px;
   font-family: Futura, sans-serif !important;
   visibility: hidden;
   font-size: 100px;
+  color: black;
 }

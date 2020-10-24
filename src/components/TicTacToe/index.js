@@ -76,6 +76,7 @@ class Board extends React.Component {
 
     //update the square that was clicked first
     outerGame.innerGames[innerGameId].squares[squareNum] = this.state.xIsNext ? 'X' : 'O';
+    displayLastMove(innerGameId, squareNum);
     //then check if we have a winner after this current move
     const innerWinner = calcInnerWinner(outerGame.innerGames[innerGameId].squares);
     //if we did have an inner winner, set it
@@ -95,7 +96,7 @@ class Board extends React.Component {
     }else{
       outerGame.activeInnerGameId=squareNum;
     }
-    displayNextMove(innerGameId, outerGame.activeInnerGameId);
+    displayNextMove(innerGameId, outerGame.activeInnerGameId, outerGame.winner);
 
     this.setState({
       outerGame: outerGame,
@@ -122,9 +123,9 @@ class Board extends React.Component {
     const winner = this.state.outerGame.winner
     let status;
     if (winner) {
-      status = 'Winner: ' + winner;
+      status = winner + ' wins!';
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = (this.state.xIsNext ? 'X' : 'O') + '\'s turn';
     }
 
     var spans = [];
@@ -158,11 +159,13 @@ class Board extends React.Component {
     }
 
     return (
-      <div class="game-board">
-        <div className="status">
-          {status}
+      <div>
+        <div class="game-board">
+          {spans}
         </div>
-        {spans}
+        <div className="status">
+          <p>{status}</p>
+        </div>
       </div>
     );
   }
@@ -172,9 +175,7 @@ export default class Game extends React.Component {
   render() {
     return (
       <div className="game">
-        <div>
-          <Board />
-        </div>
+        <Board />
       </div>
     );
   }
@@ -225,7 +226,7 @@ function calcOuterWinner(outerGame){
 
 function disableInnerGame(gameId, winner) {
   const nodes = document.getElementById(getGameId(gameId)).getElementsByTagName('*');
-  console.log(nodes);
+  document.getElementById(getGameId(gameId)).style.background = "rgba(255, 255, 255, 0.3)";
   for (var i = 0; i < nodes.length; i++) {
     nodes[i].disabled = true;
   }
@@ -235,11 +236,15 @@ function disableInnerGame(gameId, winner) {
   winnerMarker.style.visibility = "visible";
 }
 
-function displayNextMove(previous, next) {
+function displayNextMove(previous, next, winner) {
   if (previous !== 99) {
     const previousGame = document.getElementById(getGameId(previous));
     previousGame.style.border = 'none';
     previousGame.style.padding = '6px';
+  }
+
+  if (winner != null) {
+    return;
   }
 
   if (next !== 99) {
@@ -247,6 +252,19 @@ function displayNextMove(previous, next) {
     nextGame.style.border = '3px solid #cb181d';
     nextGame.style.padding = '3px';
   }
+}
+
+function displayLastMove(gameId, squareNum) {
+  // Clear out old "last move"
+  for (var j = 0; j < 9; j++) {
+    let nodes = document.getElementById(getGameId(j)).getElementsByTagName('Button');
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].style.color = 'white';
+    }
+  }
+  // Set last move
+  const nodes = document.getElementById(getGameId(gameId)).getElementsByTagName('Button');
+  nodes[squareNum].style.color = '#cb181d';
 }
 
 /**

@@ -19,7 +19,6 @@ const TicTacToePage = () => {
             <ScrollToTop />
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <Navbar toggle={toggle}/>
-            <HeroSection />
             <Game />
             <Footer/>
         </>
