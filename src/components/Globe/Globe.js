@@ -7,6 +7,7 @@ import Spinner from './Spinner';
 import './Globe.css';
 import Modal from '../Modal/Modal.js';
 import {BsSearch} from 'react-icons/bs';
+import {FaTable} from 'react-icons/fa';
 
 const World = (props)=>{
   const globeEl = useRef();
@@ -19,6 +20,7 @@ const World = (props)=>{
     const [data,setData] =useState([]);
     const [countryInfo, setCountryInfo] = useState({name:'',caseperM:0,deathsperM:0,totalCase:0,testperM:0});
     const [search,setSearch] =useState(false);
+    const [program, setProgram] = useState('');
 
     useEffect(() => {
         let mounted =true;
@@ -124,7 +126,7 @@ const World = (props)=>{
                 return 404;
               }
               return res.json()});
-           if(typeof country_data ==='number'){
+           if(typeof country_data ==='number' || country_name.length===0){
             document.getElementById('search_field').value="";
            }
            else{
@@ -136,6 +138,7 @@ const World = (props)=>{
             testperM:country_data.testsPerOneMillion
           });
            setModalState(true);
+           setProgram('search');
            setData([country_data.active,country_data.deaths,country_data.recovered]);
            document.getElementById('search_field').value="";
             }
@@ -143,11 +146,18 @@ const World = (props)=>{
         }
           function handleClose(){
             setModalState(false);
+            setProgram('');
+          }
+          function handleTableView(){
+            setProgram('table');
+            setModalState(true);
+
           }
         return (
         <div className="Canvas_Container" >
           <div className="top-info-container">
      <div className="title">
+       <FaTable onClick={handleTableView} className="search"></FaTable>
        {!search ?<p>COVID-19 GLOBE TRACKER</p>:<input id="search_field" onKeyDown={handleCountrySearch} placeholder="Search"/> 
         }
        <BsSearch onClick={handleSearch} className="search"></BsSearch>
@@ -155,7 +165,7 @@ const World = (props)=>{
      {/* <input className="title" placeholder="INPUT a country" />*/}
     {search?<span>Type the country name, iso2, or iso3 and press enter</span>:null}
     </div>{loading ? null : <Spinner page={'globe'}/> }
-        <Modal show={modalState} handleClose={handleClose} name ={countryInfo}data={data}></Modal>
+        <Modal show={modalState} program ={program}  handleClose={handleClose} name ={countryInfo}data={data}></Modal>
         <Globe
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
           backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
@@ -175,6 +185,7 @@ const World = (props)=>{
           onPolygonHover={setHoverD}
           onPolygonClick={({ properties: d },e)=>{
             setModalState(true);
+            setProgram('search');
             setData([d.activeCases,d.totalDeaths,d.recoveries]);
             setCountryInfo({name:d.ADMIN,caseperM:d.caseperM,deathsperM:d.deathsperM,totalCase:d.totalCases,testperM:d.testperM});
           }}

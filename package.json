@@ -6,7 +6,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "cors": "^2.8.5",
     "d3": "^5.16.0",
+    "express": "^4.17.1",
+    "gridjs": "^2.1.0",
+    "gridjs-react": "^1.16.0",
     "jest-puppeteer": "^4.4.0",
     "puppeteer": "^5.3.1",
     "react": "^16.13.1",
@@ -21,7 +25,7 @@
     "topojson": "^3.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
