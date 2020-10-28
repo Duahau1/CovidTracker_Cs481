@@ -7,26 +7,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [10.x, 8.x]
-    
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: npm install
-      run: |
-        npm install
-    - name: Add remote origin
-      run: |
-        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-    - name: Deploy to Heroku
-      run: |
-        git push heroku HEAD:master -f
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name:  ${{secrets.HEROKU_APP_KEY}} #Must be unique in Heroku
+          heroku_email:  ${{secrets.HEROKU_API_EMAIL}}
