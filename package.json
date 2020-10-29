@@ -26,6 +26,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "local": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
