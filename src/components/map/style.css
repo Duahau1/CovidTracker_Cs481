@@ -1,0 +1,107 @@
+.county:hover{
+    stroke:black;
+    stroke-opacity: 2;
+}
+
+.usmap{
+    width:65%;
+    height:50%;
+}
+
+.county {
+    stroke:black;
+    stroke-width: 1;
+    cursor: pointer;
+}
+
+.first_component{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(73,36,38);
+    background: radial-gradient(circle, rgba(73,36,38,0.8914916308320203) 26%, rgba(179,41,41,0.9026961126247374) 88%);
+}
+
+#state{
+    background-color: rgba(0,0,0,0);
+    border: 0;
+    border-bottom: 1px solid #fff;
+    width: 250px;
+    font-size: 1em;
+    text-align: center;
+    color: #fff;
+    padding:10px;
+   
+}
+#search{
+    color: white;
+    border-radius: 4px;    
+font-size: 1em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #01bf71;
+    margin-left:10px;
+    outline: none;
+    border: none;
+    padding: 10px 22px;
+    color: #010606;
+    cursor: pointer;
+}
+#search_engine{
+    padding-top:4rem;
+    z-index: 2;
+
+}
+.card-tool {
+    font-family: "Space Mono", monospace;
+    font-size: medium;
+    background: rgb(55,73,83);
+    background: linear-gradient(90deg, rgba(55,73,83,1) 24%, rgba(18,87,129,1) 100%);
+    width: 190px;
+    border: 2px solid #0066cc;
+    border-radius: 10px;
+    z-index: 2;
+    position: absolute;
+    transform: translate(-60%, -60%) scale(0.8);
+  }
+  
+  .container-tool {
+    padding-top: 1px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-align: center;
+  }
+  
+  .card-img-tool {
+    object-fit: contain;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .card-title-tool {
+    font-weight: bold;
+    color:whitesmoke;
+
+  }
+  .card-spacer-tool {
+    height: 5px;
+  }
+.card-info-tool{
+    font-weight: lighter;
+    font-size: 1.1rem;
+    color:whitesmoke;
+}
+.spinbodyUSA {
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(73,36,38);
+    background: radial-gradient(circle, rgba(73,36,38,0.8914916308320203) 26%, rgba(179,41,41,0.9026961126247374) 100%);
+    z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }

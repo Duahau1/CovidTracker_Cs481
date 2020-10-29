@@ -1,0 +1,124 @@
+body {
+  background: black;
+  color: white;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 7px 15px;
+  background: #cb181d;
+  border-radius: 5px;
+  width: max-content;
+}
+
+.square {
+  font-family: Futura, sans-serif !important;
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.0);
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+  color: white;
+}
+
+.square:disabled {
+  color: #757272;
+  border-color: #757272;
+}
+
+.zero, .three, .six {
+  border-left: none;
+}
+
+.zero, .one, .two {
+  border-top: none;
+}
+
+.two, .five, .eight {
+  border-right: none;
+}
+
+.six, .seven, .eight {
+  border-bottom: none;
+}
+
+#zero, #winner-0, #one, #winner-1, #two, #winner-2 {
+  grid-row: 2;
+}
+
+#three, #winner-3, #four, #winner-4, #five, #winner-5 {
+  grid-row: 3;
+}
+
+#six, #winner-6, #seven, #winner-7, #eight, #winner-8 {
+  grid-row: 4;
+}
+
+#zero, #winner-0, #three, #winner-3, #six, #winner-6 {
+  grid-column: 1;
+}
+
+#one, #winner-1, #four, #winner-4, #seven, #winner-7 {
+  grid-column: 2;
+}
+
+#two, #winner-2, #five, #winner-5, #eight, #winner-8 {
+  grid-column: 3;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  margin-top: 100px;
+  display: inline-block;
+  flex-direction: row;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.game-board {
+  display: grid;
+  text-align: center;
+  margin: auto;
+  width: max-content;
+}
+
+#game-board {
+  display: inline-block;
+}
+
+.single-game {
+  margin: 10px;
+  text-align: center;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.winner-marker {
+  margin-top: 10px;
+  font-family: Futura, sans-serif !important;
+  visibility: hidden;
+  font-size: 100px;
+  color: black;
+}
