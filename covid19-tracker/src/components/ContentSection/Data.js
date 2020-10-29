@@ -36,13 +36,13 @@ export const homeObjectTwo = {
 }
 export const homeObjectThree = {
     id: 'about',
-    linkOne: 'aboutUs',
+    linkOne: '/aboutUs',
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
     topLine: 'About Us',
     headline: 'Boise State Senior Design Group',
-    description: 'We can put any information here to help the user to interact with the map',
+    description: 'Payton Elsy, Kass Adams, Van Nguyen, Alex Acevedo',
     buttonLabel: 'Dont Click',
     imgStart: false,
     img: require('../../images/covid4.jpg'),
