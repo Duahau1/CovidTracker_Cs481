@@ -28,8 +28,7 @@ const onHover = () => {
             </HeroBackground>
             <HeroContent>
                 <HeroH1>Covid 19 Tracker</HeroH1>
-                <HeroP1>Boise State CS Senior Design
-                </HeroP1>
+                <HeroP1>Boise State CS Senior Design</HeroP1>
                 <HeroBtnWrapper>
                     <Button to='signup' 
                     onMouseEnter={onHover}
