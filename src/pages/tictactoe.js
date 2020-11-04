@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import Footer from '../components/Footer';
-import PageNavbar from '../components/Navbar/pageNav';
+import HeroSection from '../components/HeroSection';
+import Navbar from '../components/Navbar';
 import ScrollToTop from '../components/ScrollToTop';
-import PageSidebar from '../components/Sidebar/pageSideBar';
-import Game from '../components/TicTacToe';
 import Sidebar from '../components/Sidebar';
 import Game from '../components/TicTacToe/Game';
 import { GameRules } from '../components/TicTacToe/GameRules'
@@ -20,9 +19,6 @@ const TicTacToePage = () => {
     return (
         <>
             <ScrollToTop />
-            <PageSidebar isOpen={isOpen} toggle={toggle} />
-            <PageNavbar toggle={toggle}/>
-            <Game />
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <Navbar toggle={toggle}/>
             <Grid container

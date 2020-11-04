@@ -51,7 +51,7 @@ export const TextWrapper = styled.div`
 `
 
 export const TopLine = styled.p`
-    color: #932108;
+    color: #01bf71;
     font-size: 16px;
     line-height: 16px;
     font-weight: 700;
@@ -90,7 +90,7 @@ export const BtnWrap = styled.div`
 export const BtnLink = styled(LinkR)`
     margin-right: 28px;
     border-radius: 50px;
-    background: #932108;
+    background: #01bf71;
     white-space: nowrap;
     padding: 10px 22px;
     color: #010606;
