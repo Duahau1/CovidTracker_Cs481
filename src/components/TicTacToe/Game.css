@@ -89,12 +89,11 @@ body {
 }
 
 .game {
-  margin-top: 100px;
+  margin-top: 100px !important;
   display: inline-block;
   flex-direction: row;
-  margin-bottom: 20px;
+  margin-bottom: 40px !important;
   text-align: center;
-  width: 100%;
 }
 
 .game-board {
