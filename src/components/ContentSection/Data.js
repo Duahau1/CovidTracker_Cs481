@@ -5,7 +5,7 @@ export const homeObjectOne = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
-    topLine: 'Covid 19',
+    topLine: 'Covid-19',
     headline: 'Interactive Map',
     description: 'Select either Global Map or USA Map to view corresponding COVID-19 Data.  Both maps are interactive allowing you to view up-to-date statistics and data.',
     buttonLabel: 'Global Map',
