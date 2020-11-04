@@ -1,24 +1,15 @@
-import React, {useState} from 'react'
-import { FaArrowRight } from 'react-icons/fa'
+import React from 'react'
 import Video from '../../video/covid3.mp4'
-import {Button} from '../ButtonElements'
 import {
 HeroContainer,
 HeroBackground,
 VideoBackground,
 HeroContent,
 HeroH1, 
-HeroP1, 
-HeroBtnWrapper, 
-ArrowForward, 
-ArrowRight} from './HeroElements'
+HeroP1,
+} from './HeroElements'
 
 function HeroSection() {
-const [hover, setHover] = useState(false)
-
-const onHover = () => {
-    setHover(!hover)
-}
 
     return (
         <HeroContainer>
@@ -28,17 +19,7 @@ const onHover = () => {
             </HeroBackground>
             <HeroContent>
                 <HeroH1>Covid 19 Tracker</HeroH1>
-                <HeroP1>Boise State CS Senior Design</HeroP1>
-                <HeroBtnWrapper>
-                    <Button to='signup' 
-                    onMouseEnter={onHover}
-                    onMouseLeave={onHover}
-                    primary='true'
-                    dark='true'
-                    >
-                        Get Started {hover ? <ArrowForward /> : <ArrowRight/>}
-                    </Button>
-                </HeroBtnWrapper>
+                <HeroP1>Boise State Computer Science Senior Design</HeroP1>
             </HeroContent>
         </HeroContainer>
     )
