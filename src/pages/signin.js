@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import Footer from '../components/Footer';
 import HeroSection from '../components/HeroSection';
-import Navbar from '../components/Navbar'
+import PageNavbar from '../components/Navbar/pageNav';
 import ScrollToTop from '../components/ScrollToTop';
-import Sidebar from '../components/Sidebar'
+import PageSidebar from '../components/Sidebar/pageSideBar';
 
 const SigninPage = () => {
 
@@ -16,8 +16,8 @@ const SigninPage = () => {
     return (
         <>
             <ScrollToTop />
-            <Sidebar isOpen={isOpen} toggle={toggle} />
-            <Navbar toggle={toggle}/>
+            <PageSidebar isOpen={isOpen} toggle={toggle} />
+            <PageNavbar toggle={toggle} />
             <HeroSection />
             <h1>This is the Sign In Page</h1>
             <Footer/>
