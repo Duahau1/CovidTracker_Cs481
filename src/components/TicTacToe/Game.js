@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-
+import './Game.css';
+import Grid from '@material-ui/core/Grid';
 var outerGame = {
   innerGames: [                                          // Row-Col
     {id: 0, squares: Array(9).fill(null), winner: null}, // Top-Left
@@ -79,6 +79,7 @@ class Board extends React.Component {
     displayLastMove(innerGameId, squareNum);
     //then check if we have a winner after this current move
     const innerWinner = calcInnerWinner(outerGame.innerGames[innerGameId].squares);
+    const isTie = calcTie(outerGame.innerGames[innerGameId].squares);
     //if we did have an inner winner, set it
     if (innerWinner) {
       disableInnerGame(innerGameId, innerWinner);
@@ -88,6 +89,9 @@ class Board extends React.Component {
       if (++outerGame.innerGamesWon>2){
         outerGame.winner = calcOuterWinner(outerGame);
       }
+    } else if (isTie) {
+      disableInnerGame(innerGameId, "");
+      outerGame.innerGames[innerGameId].winner = "TIE";
     }
 
     //check that the new activeGame is not already won, set the next activeInnerGameId
@@ -174,9 +178,9 @@ class Board extends React.Component {
 export default class Game extends React.Component {
   render() {
     return (
-      <div className="game">
+      <Grid item className="game">
         <Board />
-      </div>
+      </Grid>
     );
   }
 }
@@ -203,6 +207,15 @@ function calcInnerWinner(innerGameSquares) {
     }
   }
   return null; // there is no winner
+}
+
+function calcTie(innerGameSquares) {
+  for (let i = 0; i < innerGameSquares.length; i++) {
+    if (innerGameSquares[i] == null) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**

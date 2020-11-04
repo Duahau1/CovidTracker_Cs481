@@ -4,7 +4,9 @@ import HeroSection from '../components/HeroSection';
 import Navbar from '../components/Navbar';
 import ScrollToTop from '../components/ScrollToTop';
 import Sidebar from '../components/Sidebar';
-import Game from '../components/TicTacToe';
+import Game from '../components/TicTacToe/Game';
+import { GameRules } from '../components/TicTacToe/GameRules'
+import Grid from '@material-ui/core/Grid';
 
 const TicTacToePage = () => {
 
@@ -19,7 +21,14 @@ const TicTacToePage = () => {
             <ScrollToTop />
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <Navbar toggle={toggle}/>
-            <Game />
+            <Grid container
+              spacing={5}
+              alignItems="center"
+              justify="center"
+              direction="row">
+              <Game />
+              <GameRules />
+            </Grid>
             <Footer/>
         </>
     )
