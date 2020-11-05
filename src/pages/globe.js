@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import Footer from '../components/Footer';
 import World from '../components/Globe/Globe';
-import PageNavbar from '../components/Navbar/pageNav';
 import ScrollToTop from '../components/ScrollToTop';
 import PageSidebar from '../components/Sidebar/pageSideBar';
+import PageNavbar from '../components/Navbar/pageNav';
 
 const GlobePage = () => {
    
@@ -16,7 +16,7 @@ const GlobePage = () => {
     return (
         <>
             <ScrollToTop />
-            <PageSidebar isOpen={isOpen} toggle={toggle} />
+            <PageSidebar isOpen={isOpen}  toggle={toggle} />
             <PageNavbar toggle={toggle} />
             <World />
             <Footer/>

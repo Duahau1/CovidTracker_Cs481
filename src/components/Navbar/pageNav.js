@@ -36,7 +36,7 @@ const PageNavbar = ({toggle}) => {
         <>
           <Nav scrollNav={scrollNav}>
               <NavBarContainer>
-                  <NavLogo to="/" onClick={toggleHome}>PKVA</NavLogo>
+                  <NavLogo to="/" onClick={toggleHome}>PKVA </NavLogo>
                   <MobileIcon onClick={toggle}>
                       <FaBars />
                   </MobileIcon>

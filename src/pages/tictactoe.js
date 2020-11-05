@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import Footer from '../components/Footer';
-import PageNavbar from '../components/Navbar/pageNav';
 import ScrollToTop from '../components/ScrollToTop';
+import Game from '../components/TicTacToe/Game';
+import { GameRules } from '../components/TicTacToe/GameRules'
+import Grid from '@material-ui/core/Grid';
 import PageSidebar from '../components/Sidebar/pageSideBar';
-import Game from '../components/TicTacToe';
+import PageNavbar from '../components/Navbar/pageNav';
 
 const TicTacToePage = () => {
 
@@ -17,11 +19,19 @@ const TicTacToePage = () => {
         <>
             <ScrollToTop />
             <PageSidebar isOpen={isOpen} toggle={toggle} />
-            <PageNavbar toggle={toggle}/>
-            <Game />
+            <PageNavbar toggle={toggle} />
+            <Grid container
+              spacing={5}
+              alignItems="center"
+              justify="center"
+              direction="row">
+              <Game />
+              <GameRules />
+            </Grid>
             <Footer/>
         </>
     )
 }
 
 export default TicTacToePage
+
