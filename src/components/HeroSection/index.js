@@ -11,7 +11,6 @@ HeroP1
 
 function HeroSection() {
 
-
     return (
         <HeroContainer>
             <HeroBackground>
@@ -20,7 +19,7 @@ function HeroSection() {
             </HeroBackground>
             <HeroContent>
                 <HeroH1>Covid 19 Tracker</HeroH1>
-                <HeroP1>Boise State Computer Science Senior Design</HeroP1>
+                <HeroP1>Boise State CS Senior Design</HeroP1>
             </HeroContent>
         </HeroContainer>
     )
