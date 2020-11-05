@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import {Link as LinkR} from 'react-router-dom'
 
-
-
-
 export const ContentContainer = styled.div`
     color: #fff;
     background: ${({lightBg}) => (lightBg ? '#f9f9f9' : '#010606')};
@@ -55,7 +52,7 @@ export const TextWrapper = styled.div`
 `
 
 export const TopLine = styled.p`
-    color: #01bf71;
+    color: #932108;
     font-size: 16px;
     line-height: 16px;
     font-weight: 700;
@@ -94,7 +91,7 @@ export const BtnWrap = styled.div`
 export const BtnLink = styled(LinkR)`
     margin-right: 28px;
     border-radius: 50px;
-    background: #01bf71;
+    background: #932108;
     white-space: nowrap;
     padding: 10px 22px;
     color: #010606;
