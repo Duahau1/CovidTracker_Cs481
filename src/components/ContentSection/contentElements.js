@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import {Link as LinkR} from 'react-router-dom'
 
+
+
+
 export const ContentContainer = styled.div`
     color: #fff;
     background: ${({lightBg}) => (lightBg ? '#f9f9f9' : '#010606')};
