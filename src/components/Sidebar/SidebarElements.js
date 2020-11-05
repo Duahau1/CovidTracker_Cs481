@@ -63,6 +63,7 @@ export const SidebarLink = styled(LinkS)`
         transition: 0.2s ease-in-out;
     }
 `
+
 export const PageSidebarLink = styled(LinkR)`
     display: flex;
     align-items: center;
