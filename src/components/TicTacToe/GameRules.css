@@ -1,0 +1,59 @@
+#rules {
+  background: rgba(255, 255, 255, 0.3);
+  height: max-content;
+  width: 350px;
+  display: inline-block;
+  flex-direction: row;
+  margin-bottom: 40px;
+  text-align: center;
+  radius: 15px;
+  color: WHITE;
+  padding: 20px;
+  padding-bottom: 3px;
+  text-align: left;
+  font-size: 12px;
+  margin-top: 100px;
+}
+
+.number {
+  color: BLACK;
+  font-size: 16px;
+}
+
+.playTitle {
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+
+.header {
+  margin-top: -45px;
+}
+
+.rule {
+  margin-bottom: 10px;
+}
+
+.horizontalRule {
+  width: 100%;
+  padding-top: 2px;
+  margin-top: 15px;
+  background: BLACK;
+}
+
+.expand {
+  display: block;
+  margin: auto;
+  color: WHITE;
+}
+
+.close {
+  position: relative;
+  top: -30px;
+  left: 290px;
+  margin: 0px;
+}
+
+.close:hover {
+  background: none;
+}

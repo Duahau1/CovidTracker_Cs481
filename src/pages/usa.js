@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 import USAMap from '../components/map/usamap';
-import PageNavbar from '../components/Navbar/pageNav';
 import PageSidebar from '../components/Sidebar/pageSideBar';
+import PageNavbar from '../components/Navbar/pageNav';
 
 const USAPage = () => {
    
@@ -17,9 +17,10 @@ const USAPage = () => {
         <>
             <ScrollToTop />
             <PageSidebar isOpen={isOpen} toggle={toggle} />
-            <PageNavbar toggle={toggle} />
+            <PageNavbar toggle={toggle}/>
             <USAMap />
             <Footer/>
+
         </>
     )
 }

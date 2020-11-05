@@ -17,7 +17,7 @@ const PageSidebar = ({isOpen, toggle}) => {
             </Icon>
             <SidebarWrapper>
                 <SidebarMenu>
-                    <PageSidebarLink to="/" onClick={toggle}>Home</PageSidebarLink>
+                    <PageSidebarLink to="/" onClick={toggle}>Home </PageSidebarLink>
                     <PageSidebarLink to="/globe" onClick={toggle}>Globe Map</PageSidebarLink>
                     <PageSidebarLink to="/usa" onClick={toggle}>USA Map</PageSidebarLink>
                     <PageSidebarLink to="/tictactoe" onClick={toggle}>TicTacToe</PageSidebarLink>

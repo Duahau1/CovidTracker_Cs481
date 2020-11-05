@@ -6,10 +6,11 @@ HeroBackground,
 VideoBackground,
 HeroContent,
 HeroH1, 
-HeroP1,
+HeroP1
 } from './HeroElements'
 
 function HeroSection() {
+
 
     return (
         <HeroContainer>

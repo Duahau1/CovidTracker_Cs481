@@ -33,6 +33,7 @@ export const HeroBackground = styled.div`
     height: 100%;
     overflow: hidden;
 `
+
 export const VideoBackground = styled.video`
     width: 100%;
     height: 100%;
