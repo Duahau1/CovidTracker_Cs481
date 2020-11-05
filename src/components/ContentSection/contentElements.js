@@ -22,6 +22,7 @@ export const ContentWrapper = styled.div`
     justify-content: center;
 `
 
+
 export const ContentRow = styled.div`
     display: grid;
     grid-auto-columns: minmax()(auto, 1fr);
@@ -103,7 +104,7 @@ export const BtnLink = styled(LinkR)`
 
     &:hover{
         transition: all 0.2s ease-in-out;
-        background: #fff;
+        background: #F1C00A;
         color: #010606;
     }
 `

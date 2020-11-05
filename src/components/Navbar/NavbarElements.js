@@ -84,6 +84,22 @@ export const NavLinks = styled(LinkS)`
         border-bottom: 3px solid #01bf71;
     }
 `
+
+export const PageNavLinks = styled(LinkR)`
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    cursor: pointer;
+
+    &.active{
+        border-bottom: 3px solid #932108;
+    }
+`
+
+
 export const NavBtn = styled.nav`
     display: flex;
     align-items: center;
@@ -108,7 +124,7 @@ export const NavBtnLink = styled(LinkR)`
 
     &:hover{
         transition: all 0.2s ease-in-out;
-        background: #fff;
+        background: #F1C00A;
         color: #010606;
     }
 `
