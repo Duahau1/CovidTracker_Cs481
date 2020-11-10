@@ -167,6 +167,9 @@ const World = (props)=>{
                 a.remove();  //afterwards we remove the element again 
                 document.getElementById('pdf-button').classList.remove('small-download');
               })
+            .catch(()=>{
+              document.getElementById('pdf-button').classList.remove('small-download');
+            })
         }
         return (
         <div className="Canvas_Container" >
