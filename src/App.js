@@ -7,7 +7,7 @@ import GlobePage from './pages/globe';
 import TicTacToePage from './pages/tictactoe';
 import AboutUsPage from './pages/about';
 import USAPage from './pages/usa';
-
+import PdfPage from './components/report/report';
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
         <Route path="/tictactoe" component={TicTacToePage} exact />
         <Route path="/aboutUs" component={AboutUsPage} exact />
         <Route path="/usa" component={USAPage} exact />
+        <Route path="/pdf" component ={PdfPage} exact />
       </Switch>
     </Router>
   );

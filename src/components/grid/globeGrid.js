@@ -1,6 +1,8 @@
-import { Grid } from 'gridjs-react';
+import { Grid, _ } from 'gridjs-react';
 import React from 'react';
 import "gridjs/dist/theme/mermaid.css";
+const FLAG_ENDPOINT='https://disease.sh/assets/img/flags';
+
 const Globegrid =()=>{
     function unixConvertTime(time){
         var date = new Date(time);
@@ -9,13 +11,25 @@ const Globegrid =()=>{
         var day = date.getUTCDate();
         return month+"/"+day+"/"+year;
         }
+    function getFlag(d){
+        if(d==null){
+            return "us";
+        }
+        else{
+            return String(d).toLowerCase();
+        }
+    }
     return (
         <Grid 
         search={true}
-        columns={["State","Updated time","Total Cases","Total Deaths"]}
+        columns={[
+                {name:"Flag",
+                 formatter: (cell) => _(<img style={{height:40, width:50}} src={cell} alt="flag" />)},
+                 "Country","Updated time","Total Cases","Total Deaths"
+                ]}
         server={{
             url: "https://corona.lmao.ninja/v2/countries",
-            then: data=>data.map(value=>[value.country,unixConvertTime(value.updated),value.cases,value.deaths]),
+            then: data=>data.map(value=>[`${FLAG_ENDPOINT}/${getFlag(value.countryInfo.iso2)}.png`,value.country,unixConvertTime(value.updated),value.cases,value.deaths]),
             handle: (res) => {
                 // no matching records found
                 if (res.status === 404) return {data: []};
@@ -23,7 +37,7 @@ const Globegrid =()=>{
                 throw Error('Not found');
         }}}
         pagination={{
-            limit:8
+            limit:6
         }}
         sort={true}
         />)

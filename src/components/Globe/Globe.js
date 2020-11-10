@@ -8,6 +8,7 @@ import './Globe.css';
 import Modal from '../Modal/Modal.js';
 import {BsSearch} from 'react-icons/bs';
 import {FaTable} from 'react-icons/fa';
+import {RiFileDownloadLine} from 'react-icons/ri';
 
 const World = (props)=>{
   const globeEl = useRef();
@@ -153,11 +154,26 @@ const World = (props)=>{
             setModalState(true);
 
           }
+          function handlePDFcreate(e){
+            document.getElementById('pdf-button').classList.add('small-download');
+            fetch('http://tic-tac-tovid.herokuapp.com/pdf-create').then(response => response.blob())
+            .then((blob)=>{
+                var url = window.URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = "report.pdf";
+                document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+                a.click();    
+                a.remove();  //afterwards we remove the element again 
+                document.getElementById('pdf-button').classList.remove('small-download');
+              })
+        }
         return (
         <div className="Canvas_Container" >
           <div className="top-info-container">
      <div className="title">
        <FaTable onClick={handleTableView} className="search"></FaTable>
+       <RiFileDownloadLine id="pdf-button" onClick={handlePDFcreate} className='search'></RiFileDownloadLine>
        {!search ?<p>COVID-19 GLOBE TRACKER</p>:<input id="search_field" onKeyDown={handleCountrySearch} placeholder="Search"/> 
         }
        <BsSearch onClick={handleSearch} className="search"></BsSearch>
