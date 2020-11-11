@@ -21,7 +21,7 @@ app.get('/pdf-create',async (req,res)=>{
   };
   let browser = await puppeteer.launch(options);
   let page = await browser.newPage();
-  await page.goto('http://http://tic-tac-tovid.herokuapp.com/pdf',{ waitUntil: 'networkidle0'});
+  await page.goto('http://tic-tac-tovid.herokuapp.com/pdfr',{ waitUntil: 'networkidle0'});
   const pdf = await page.pdf({format:'A1'});
   await browser.close();
   res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length })
