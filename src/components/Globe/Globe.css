@@ -119,7 +119,10 @@
       z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
       cursor: pointer; /* Add a pointer on hover */
     }
-    
+    .small-download{
+      animation: downloading 1s linear infinite;
+      pointer-events: none;
+    }
     .spinner {
       border: 16px solid rgba(0, 0, 0, 0.8); /* Light grey */
       border-top: 16px solid rgb(253, 80, 0); /* Blue */
@@ -170,3 +173,18 @@
         #850000
       );
     }
+    @keyframes downloading {
+      0% {
+        transform: translateY(-20%);
+      }
+      50%{
+        transform: translateY(0%);
+      }
+      75% {
+        transform: translateY(20%);
+      }
+      100%{
+        transform: translateY(0%);
+      }
+    }
+    

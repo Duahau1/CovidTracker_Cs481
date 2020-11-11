@@ -3,6 +3,10 @@
 ![](https://github.com/Duahau1/CovidTracker_Cs481/workflows/Continuous%20Integration/badge.svg)
 ![](https://github.com/Duahau1/CovidTracker_Cs481/workflows/Continuous%20Deployment/badge.svg)
 
+## Contributors
+[![](https://avatars1.githubusercontent.com/u/35185555?s=50)](https://github.com/Duahau1)
+[![](https://avatars1.githubusercontent.com/u/24856511?s=50)](https://github.com/acevedo88)
+[![](https://avatars0.githubusercontent.com/u/47285330?s=50)](https://github.com/KassAdams)
 
 ## Available Scripts
 
