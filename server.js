@@ -11,7 +11,9 @@ app.get('/pdf-create',async (req,res)=>{
   let options = {
     headless: true,
     args:[
-      '--start-maximized' // you can also use '--start-fullscreen'
+      '--start-maximized', // you can also use '--start-fullscreen'
+      '--no-sandbox',
+      '--disable-setuid-sandbox'
    ],
     defaultViewport: {
         width: 1920,
