@@ -7,7 +7,7 @@
 [![](https://avatars1.githubusercontent.com/u/35185555?s=50)](https://github.com/Duahau1)
 [![](https://avatars1.githubusercontent.com/u/24856511?s=50)](https://github.com/acevedo88)
 [![](https://avatars0.githubusercontent.com/u/47285330?s=50)](https://github.com/KassAdams)
-[![](https://avatars0.githubusercontent.com/u/43277016?s=10)](https://github.com/paytonelsey)
+[![](https://user-images.githubusercontent.com/43277016/98730992-47966700-235a-11eb-8210-0ff456a982ff.JPG?s=50)](https://github.com/paytonelsey)
 
 ## Available Scripts
 
