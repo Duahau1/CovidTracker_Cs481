@@ -164,6 +164,9 @@ class Board extends React.Component {
 
     return (
       <div>
+        <div id="freeMove">
+          <p>You have a free move!</p>
+        </div>
         <div class="game-board">
           {spans}
         </div>
@@ -218,6 +221,17 @@ function calcTie(innerGameSquares) {
   return true;
 }
 
+function displayWinner(a,b,c) {
+  const wins = [a,b,c];
+  for (let i = 0; i < 3; i++) {
+    const gameId = getGameId(wins[i]);
+    console.log(gameId);
+    console.log(document.getElementById(gameId));
+    document.getElementById(gameId).style.border = 'solid 2px red';
+    console.log('here ', i);
+  }
+}
+
 /**
  * Calculate the winner of the outer game, OVERALL WINNER
  * @param {*} outerGame
@@ -230,6 +244,7 @@ function calcOuterWinner(outerGame){
     if (outerGame.innerGames[a].winner
       && outerGame.innerGames[a].winner  === outerGame.innerGames[b].winner
       && outerGame.innerGames[a].winner  === outerGame.innerGames[c].winner ) {
+      displayWinner(a,b,c);
       return outerGame.innerGames[a].winner; // if was a winner return 'X' or 'O'
     }
   }
@@ -250,20 +265,25 @@ function disableInnerGame(gameId, winner) {
 }
 
 function displayNextMove(previous, next, winner) {
+  if (winner != null) {
+    return;
+  }
+  
+  document.getElementById('freeMove').style.visibility = "hidden";
   if (previous !== 99) {
     const previousGame = document.getElementById(getGameId(previous));
     previousGame.style.border = 'none';
     previousGame.style.padding = '6px';
   }
 
-  if (winner != null) {
-    return;
-  }
-
   if (next !== 99) {
     const nextGame = document.getElementById(getGameId(next));
     nextGame.style.border = '3px solid #cb181d';
     nextGame.style.padding = '3px';
+  }
+
+  if (next === 99) {
+    document.getElementById('freeMove').style.visibility = "visible";
   }
 }
 
