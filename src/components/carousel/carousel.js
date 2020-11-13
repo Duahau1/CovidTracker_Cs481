@@ -125,6 +125,7 @@ useEffect(()=>{
         }
         
         </div>
+        <div style={{width:'60%', margin:'0 auto'}}>
         <Slider
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
@@ -134,6 +135,7 @@ useEffect(()=>{
             step={2}
             valueLabelDisplay="on"
           />
+        </div>
         <span style={{display:'inherit',color: '#3255B3'}}>Slide to display more states</span>
 
         </div>
