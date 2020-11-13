@@ -6,8 +6,11 @@ const tooltip =(props)=>{
 function numberWithCommas(x){
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
+  let Cardclass = props.carousel?"card-tool2":"card-tool";
+  
     return (
-        <div className="card-tool" style={{opacity:props.opacity, left:props.left, top:props.top}} >
+        <div className={Cardclass} style={{opacity:props.opacity, left:props.left, top:props.top, zIndex:props.zIndex||10, 
+        transform:`scale(${props.scale})`||'scale(0.8)'}} >
         <img className="card-img-tool" src={`${FLAG_ENDPOINT}${String(props.data.name).replace(/\s+/g,'-')}-small.png`} alt="flag" />
         <div className="container-tool">
            <span className="card-title-tool"><b>{String(props.data.name).toUpperCase()}</b></span> <br />
