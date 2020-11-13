@@ -45,12 +45,11 @@
     left:0;
 }
 .MuiSlider-root{
-    width: 60%;
+    width: "60% !important";
     margin-top:3rem;
 }
 .PrivateValueLabel-circle-4{
-    background: linear-gradient(90deg, rgba(55,73,83,1) 24%, rgba(18,87,129,1) 100%);
-
+    background: "linear-gradient(90deg, rgba(55,73,83,1) 24%, rgba(18,87,129,1) 100%) !important";
 }
 @keyframes spinning {
     0% {
