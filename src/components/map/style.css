@@ -120,3 +120,61 @@ font-size: 1em;
     top:0.8rem;
     cursor: pointer;
   }
+  @keyframes spinning {
+    0% {
+      transform: rotateY(30deg);
+    }
+    50%{
+      transform: rotateY(60deg);
+    }
+    100%{
+      transform: rotateY(90deg);
+    }
+  }
+  @keyframes re_spinning {
+    100% {
+      transform: rotateY(30deg);
+    }
+    50%{
+      transform: rotateY(60deg);
+    }
+    0%{
+      transform: rotateY(90deg);
+    }
+  }
+  @keyframes flattening {
+    0% {
+      transform: rotateX(20deg) ;
+    }
+    20%{
+      transform: rotateX(40deg) ;
+    }
+    50%{
+      transform: rotateX(60deg) ;
+    }
+    80%{
+      transform: rotateX(79deg) rotateZ(100deg);
+    }
+    100%{
+      transform: rotateX(89deg) rotateZ(180deg) ;
+      top:240px;
+    }  
+  }
+  @keyframes reset_flat {
+    100% {
+      transform: rotateX(0deg) ;
+    }
+    80%{
+      transform: rotateX(40deg) ;
+    }
+    50%{
+      transform: rotateX(60deg) ;
+    }
+    30%{
+      transform: rotateX(79deg) rotateZ(100deg);
+    }
+    0%{
+      transform: rotateX(89deg) rotateZ(180deg) ;
+
+    }  
+  }
