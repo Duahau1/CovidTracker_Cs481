@@ -9,7 +9,7 @@ return (
 <div style={{fontSize: '1.2rem',color:'#fff',opacity: '0.6'}}>COVID-19 STATUS</div>
 <hr/>
 
-<Chart width={props.width} height={props.height} stateName={props.stateName}></Chart>
+<Chart panel={{top:undefined,transform:undefined}} width={props.width} height={props.height} stateName={props.stateName}></Chart>
 
 </div>
 )

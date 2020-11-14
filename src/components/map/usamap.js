@@ -17,8 +17,6 @@ const USAMap = () => {
   const [stateData,setStateData] =useState();
   const [loading,setLoading] =useState(false);
   
-  
-
   useEffect(() => {
     let mounted =true;
       var margin = { top: 20, right: 20, bottom: 60, left: 50 };
@@ -203,7 +201,7 @@ const USAMap = () => {
         <Modal  show={modalState} stateName={search}  handleClose={handleClose} width={dimension.width} height={dimension.height}/>
       </div>
       <svg className="usmap" ref={mapref}></svg>
-      {tooltip.opacity?<Tooltip  carousel={false} data={tooltip.data} left={tooltip.left} top={tooltip.top} opacity={tooltip.opacity} />:null}
+      {tooltip.opacity?<Tooltip length={[]} carousel={false} data={tooltip.data} left={tooltip.left} top={tooltip.top} opacity={tooltip.opacity} />:null}
     </div>
   )
 }

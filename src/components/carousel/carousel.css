@@ -19,7 +19,7 @@
     border-radius: 4px;    
     font-size: 1em;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(90deg, rgba(55,73,83,1) 24%, rgba(18,87,129,1) 100%);
+    background: linear-gradient(90deg, rgba(18,87,129,1) 24%,rgba(55,73,83,1) 100%);
     margin-left:10px;
     outline: none;
     border: none;
@@ -49,16 +49,8 @@
     margin-top:3rem;
 }
 .PrivateValueLabel-circle-4{
-    background: "linear-gradient(90deg, rgba(55,73,83,1) 24%, rgba(18,87,129,1) 100%) !important";
+    background: linear-gradient(90deg, rgba(55,73,83,1) 24%, rgba(18,87,129,1) 100%) !important;
 }
-@keyframes spinning {
-    0% {
-      transform: rotateX(30deg);
-    }
-    50%{
-      transform: rotateY(60deg);
-    }
-    100%{
-      transform: rotateY(90deg);
-    }
-  }
+.tempStateChart{
+    height: 80%;
+}

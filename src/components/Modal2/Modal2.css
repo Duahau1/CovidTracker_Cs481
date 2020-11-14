@@ -55,7 +55,6 @@
     padding:10px;
     margin:10px;
     overflow: hidden;
-    
   }
   .panel{
     display:flex;
@@ -87,11 +86,24 @@
   fill:white;
   display: inline-block;
 }
+.bar2{
+  fill:#304f6e;
+  display: inline-block;
+}
 
 .chart{
   width:70%;
   height:60%;
   position: absolute;
   bottom:0;
+}
+
+
+.chart2{
+  width:70%;
+  height:60%;
+  position: absolute;
+  top:0;
+  
 }
 
