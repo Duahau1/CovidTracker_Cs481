@@ -268,7 +268,7 @@ function displayNextMove(previous, next, winner) {
   if (winner != null) {
     return;
   }
-  
+
   document.getElementById('freeMove').style.visibility = "hidden";
   if (previous !== 99) {
     const previousGame = document.getElementById(getGameId(previous));
@@ -280,9 +280,7 @@ function displayNextMove(previous, next, winner) {
     const nextGame = document.getElementById(getGameId(next));
     nextGame.style.border = '3px solid #cb181d';
     nextGame.style.padding = '3px';
-  }
-
-  if (next === 99) {
+  } else {
     document.getElementById('freeMove').style.visibility = "visible";
   }
 }

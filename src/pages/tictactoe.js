@@ -34,4 +34,3 @@ const TicTacToePage = () => {
 }
 
 export default TicTacToePage
-
