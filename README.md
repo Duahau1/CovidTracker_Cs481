@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1>Tic Tac Tovid Project</h1>
+
+![](https://github.com/Duahau1/CovidTracker_Cs481/workflows/Continuous%20Integration/badge.svg)
+![](https://github.com/Duahau1/CovidTracker_Cs481/workflows/Continuous%20Deployment/badge.svg)
+
 
 ## Available Scripts
 

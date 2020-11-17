@@ -81,9 +81,25 @@ export const NavLinks = styled(LinkS)`
     cursor: pointer;
 
     &.active{
-        border-bottom: 3px solid #01bf71;
+        border-bottom: 3px solid #932108;
     }
 `
+
+export const PageNavLinks = styled(LinkR)`
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    cursor: pointer;
+
+    &.active{
+        border-bottom: 3px solid #932108;
+    }
+`
+
+
 export const NavBtn = styled.nav`
     display: flex;
     align-items: center;
@@ -95,7 +111,7 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled(LinkR)`
     border-radius: 50px;
-    background: #01bf71;
+    background: #932108;
     white-space: nowrap;
     padding: 10px 22px;
     color: #010606;
@@ -108,7 +124,7 @@ export const NavBtnLink = styled(LinkR)`
 
     &:hover{
         transition: all 0.2s ease-in-out;
-        background: #fff;
+        background: #F1C00A;
         color: #010606;
     }
 `

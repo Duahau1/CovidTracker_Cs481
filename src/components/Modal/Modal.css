@@ -83,3 +83,7 @@
     height: 1px;
     overflow: hidden;
 }
+.gridjs.gridjs-container{
+  position: relative;
+  top:3rem;
+}

@@ -22,6 +22,7 @@ export const ContentWrapper = styled.div`
     justify-content: center;
 `
 
+
 export const ContentRow = styled.div`
     display: grid;
     grid-auto-columns: minmax()(auto, 1fr);
@@ -51,7 +52,7 @@ export const TextWrapper = styled.div`
 `
 
 export const TopLine = styled.p`
-    color: #01bf71;
+    color: #932108;
     font-size: 16px;
     line-height: 16px;
     font-weight: 700;
@@ -90,7 +91,7 @@ export const BtnWrap = styled.div`
 export const BtnLink = styled(LinkR)`
     margin-right: 28px;
     border-radius: 50px;
-    background: #01bf71;
+    background: #932108;
     white-space: nowrap;
     padding: 10px 22px;
     color: #010606;
@@ -103,7 +104,7 @@ export const BtnLink = styled(LinkR)`
 
     &:hover{
         transition: all 0.2s ease-in-out;
-        background: #fff;
+        background: #F1C00A;
         color: #010606;
     }
 `
