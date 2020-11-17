@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Grid, Card, IconButton } from '@material-ui/core';
-import { KeyboardArrowUp, KeyboardArrowDown, Close } from '@material-ui/icons';
+import { Grid, Card, IconButton, Tooltip } from '@material-ui/core';
+import { KeyboardArrowUp, KeyboardArrowDown, Close, Help } from '@material-ui/icons';
 import './GameRules.css';
 
 export const GameRules: React.FunctionComponent = () => {
@@ -16,14 +15,22 @@ export const GameRules: React.FunctionComponent = () => {
   }
 
   if (closed) {
-    return (<Grid/>);
+    return (
+      <Grid className={"helpContainer"}>
+        <Tooltip title="Game Rules">
+          <IconButton className={"help"} onClick={handleClose}><Help/></IconButton>
+        </Tooltip>
+      </Grid>
+    );
   }
 
   if (!minimized) {
     return (
       <Grid item>
         <Card id="rules">
-          <IconButton className={"close"} onClick={handleClose}><Close/></IconButton>
+          <Tooltip title="Close Rules">
+            <IconButton className={"close"} onClick={handleClose}><Close/></IconButton>
+          </Tooltip>
           <p className={"playTitle header"}>HOW TO PLAY:</p>
           <p className="rule">
             <b className="number">
@@ -69,10 +76,12 @@ export const GameRules: React.FunctionComponent = () => {
             inner game wins in a row, or there are no legal moves left, in which
             case the game is a tie.
           </p>
-          <Grid>
-            <IconButton className={"expand"} onClick={handleClick}>
-              <KeyboardArrowUp/>
-            </IconButton>
+          <Grid container justify={'center'} alignItems={'center'}>
+            <Tooltip title="Minimize Rules">
+              <IconButton className={"expand"} onClick={handleClick}>
+                <KeyboardArrowUp/>
+              </IconButton>
+            </Tooltip>
           </Grid>
         </Card>
       </Grid>
@@ -81,11 +90,17 @@ export const GameRules: React.FunctionComponent = () => {
     return (
       <Grid item>
         <Card id="rules">
-          <IconButton className={"close"} onClick={handleClose}><Close/></IconButton>
+          <Tooltip title="Close Rules">
+            <IconButton className={"close"} onClick={handleClose}><Close/></IconButton>
+          </Tooltip>
           <p className={"playTitle header"}>HOW TO PLAY:</p>
-          <IconButton className={"expand"} onClick={handleClick}>
-            <KeyboardArrowDown/>
-          </IconButton>
+          <Grid container justify={'center'} alignItems={'center'}>
+            <Tooltip title="Expand Rules">
+              <IconButton className={"expand"} onClick={handleClick}>
+                <KeyboardArrowDown/>
+              </IconButton>
+            </Tooltip>
+          </Grid>
         </Card>
       </Grid>
     )

@@ -42,8 +42,6 @@
 }
 
 .expand {
-  display: block;
-  margin: auto;
   color: WHITE;
 }
 
@@ -52,6 +50,16 @@
   top: -30px;
   left: 290px;
   margin: 0px;
+}
+
+.help {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.helpContainer {
+  position: relative;
+  margin-left: -40px;
+  margin-top: 460px;
 }
 
 .close:hover {
