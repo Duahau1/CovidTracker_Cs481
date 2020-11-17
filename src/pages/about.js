@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import Footer from '../components/Footer';
-import HeroSection from '../components/HeroSection';
 import ScrollToTop from '../components/ScrollToTop';
 import PageSidebar from '../components/Sidebar/pageSideBar';
 import PageNavbar from '../components/Navbar/pageNav';
+import { alex, payton, van, kass } from '../components/ContentSection/Data';
+import AboutContentSection from '../components/ContentSection/indexAbout';
 
 
 const AboutUsPage = () => {
@@ -19,8 +20,10 @@ const AboutUsPage = () => {
             <ScrollToTop />
             <PageSidebar isOpen={isOpen} toggle={toggle} />
             <PageNavbar toggle={toggle}/>
-            <HeroSection />
-            <h1>This is the About Us Page!</h1>
+            <AboutContentSection {...alex} />
+            <AboutContentSection {...payton}/>
+            <AboutContentSection {...van}/>
+            <AboutContentSection {...kass}/>
             <Footer/>
         </>
     )

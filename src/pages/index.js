@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import ContentSection from '../components/ContentSection';
-import ContentSectionGlobe from '../components/ContentSection/indexGlobe';
-import { homeObjectOne } from '../components/ContentSection/Data';
+import { homeObjectOneGlobe, homeObjectOneUSA } from '../components/ContentSection/Data';
 import { homeObjectTwo } from '../components/ContentSection/Data';
 import { homeObjectThree } from '../components/ContentSection/Data';
 import Footer from '../components/Footer';
@@ -24,7 +23,8 @@ const Home = () => {
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <Navbar toggle={toggle}/>
             <HeroSection />
-            <ContentSectionGlobe {...homeObjectOne}/>
+            <ContentSection {...homeObjectOneGlobe}/>
+            <ContentSection {...homeObjectOneUSA}/>
             <ContentSection {...homeObjectTwo}/>
             <ContentSection {...homeObjectThree}/>
             <Footer/>

@@ -23,9 +23,7 @@ const PageSidebar = ({isOpen, toggle}) => {
                     <PageSidebarLink to="/tictactoe" onClick={toggle}>TicTacToe</PageSidebarLink>
                     <PageSidebarLink to="/aboutUS" onClick={toggle}>About Us</PageSidebarLink>
                 </SidebarMenu>
-                <SideBtnWrap>
-                    <SidebarRoute to='/signin'>Sign In</SidebarRoute>
-                </SideBtnWrap>
+
             </SidebarWrapper>
         </SidebarContainer>
     )

@@ -68,9 +68,9 @@ const PageNavbar = ({toggle}) => {
                       </NavItem>
                   </NavMenu>
                   <NavBtn>
-                      <NavBtnLink to='/signin'
+                      <NavBtnLink
                       smooth={true} duration={500} spy={true}
-                      exact='true' offset={-80}>Sign In</NavBtnLink>
+                      exact='true' offset={-80}></NavBtnLink>
                   </NavBtn>
               </NavBarContainer>
           </Nav>
