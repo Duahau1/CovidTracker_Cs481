@@ -6,6 +6,7 @@ import fipsData from './fipstostate.json';
 import Tooltip from './tooltip';
 import Modal from '../Modal2/Modal';
 import Spinner from '../Globe/Spinner';
+import {BiCarousel} from 'react-icons/bi';
 
 const USAMap = () => {
   let mapref = useRef(null);
@@ -16,8 +17,6 @@ const USAMap = () => {
   const [stateData,setStateData] =useState();
   const [loading,setLoading] =useState(false);
   
-  
-
   useEffect(() => {
     let mounted =true;
       var margin = { top: 20, right: 20, bottom: 60, left: 50 };
@@ -191,16 +190,18 @@ const USAMap = () => {
   }
   return (
     <div className="first_component">
+      
       {loading ? null : <Spinner page={'usa'} /> }
         <div id="search_engine">
-            <input type="text" placeholder="Search..." id="state" onChange={handleSearch} onKeyDown={handleEnter}/>
+        <BiCarousel size={38} className="carousel" onClick={()=>window.location.href='/carousel'} />
+        <input type="text" placeholder="Search..." id="state" onChange={handleSearch} onKeyDown={handleEnter}/>
           <button id="search" onClick={handleClick}>
             Search
         </button>
         <Modal  show={modalState} stateName={search}  handleClose={handleClose} width={dimension.width} height={dimension.height}/>
       </div>
       <svg className="usmap" ref={mapref}></svg>
-      {tooltip.opacity?<Tooltip data={tooltip.data} left={tooltip.left} top={tooltip.top} opacity={tooltip.opacity} />:null}
+      {tooltip.opacity?<Tooltip length={[]} carousel={false} data={tooltip.data} left={tooltip.left} top={tooltip.top} opacity={tooltip.opacity} />:null}
     </div>
   )
 }

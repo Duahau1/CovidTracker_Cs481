@@ -64,7 +64,17 @@ font-size: 1em;
     position: absolute;
     transform: translate(-60%, -60%) scale(0.8);
   }
-  
+  .card-tool2 {
+    font-family: "Space Mono", monospace;
+    font-size: medium;
+    background: rgb(55,73,83);
+    background: linear-gradient(90deg, rgba(55,73,83,1) 24%, rgba(18,87,129,1) 100%);
+    width: 190px;
+    border: 2px solid #0066cc;
+    border-radius: 10px;
+    z-index: 2;
+    position: absolute;
+  }
   .container-tool {
     padding-top: 1px;
     padding-bottom: 8px;
@@ -104,4 +114,67 @@ font-size: 1em;
     background: radial-gradient(circle, rgba(73,36,38,0.8914916308320203) 26%, rgba(179,41,41,0.9026961126247374) 100%);
     z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
+  }
+  .carousel{
+    position: relative;
+    top:0.8rem;
+    cursor: pointer;
+  }
+  @keyframes spinning {
+    0% {
+      transform: rotateY(30deg);
+    }
+    50%{
+      transform: rotateY(60deg);
+    }
+    100%{
+      transform: rotateY(90deg);
+    }
+  }
+  @keyframes re_spinning {
+    100% {
+      transform: rotateY(30deg);
+    }
+    50%{
+      transform: rotateY(60deg);
+    }
+    0%{
+      transform: rotateY(90deg);
+    }
+  }
+  @keyframes flattening {
+    0% {
+      transform: rotateX(20deg) ;
+    }
+    20%{
+      transform: rotateX(40deg) ;
+    }
+    50%{
+      transform: rotateX(60deg) ;
+    }
+    80%{
+      transform: rotateX(79deg) rotateZ(100deg);
+    }
+    100%{
+      transform: rotateX(89deg) rotateZ(180deg) ;
+      top:240px;
+    }  
+  }
+  @keyframes reset_flat {
+    100% {
+      transform: rotateX(0deg) ;
+    }
+    80%{
+      transform: rotateX(40deg) ;
+    }
+    50%{
+      transform: rotateX(60deg) ;
+    }
+    30%{
+      transform: rotateX(79deg) rotateZ(100deg);
+    }
+    0%{
+      transform: rotateX(89deg) rotateZ(180deg) ;
+
+    }  
   }

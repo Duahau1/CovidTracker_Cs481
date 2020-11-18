@@ -1,9 +1,23 @@
-import { Grid, _ } from 'gridjs-react';
+import { Grid} from 'gridjs-react';
 import React from 'react';
 import "gridjs/dist/theme/mermaid.css";
-const FLAG_ENDPOINT='https://disease.sh/assets/img/flags';
+import html2pdf from 'html2pdf.js';
 
 const pdfGrid =()=>{
+    function handlePDFcreate(){
+        [...document.querySelectorAll('button')].map((value)=>{
+            value.style.display='none';
+        })
+        const input = document.getElementById('divToPrint');
+        html2pdf(input).then(()=>{
+            [...document.querySelectorAll('button')].map((value)=>{
+                value.style.display='block';
+            })
+            window.location.href ='/globe';
+        }).catch((e)=>{
+            console.log(e);
+        })
+    }
     function unixConvertTime(time){
         var date = new Date(time);
         var year = date.getUTCFullYear();
@@ -11,27 +25,16 @@ const pdfGrid =()=>{
         var day = date.getUTCDate();
         return month+"/"+day+"/"+year;
         }
-    function getFlag(d){
-        if(d==null){
-            return "us";
-        }
-        else{
-            return String(d).toLowerCase();
-        }
-    }
     return (
-        <div>
-        <h1>Covid19 Coronavirus Tracker Worlwide Report </h1>
+        <div id="divToPrint">
+        <h1 style={{color:'black'}}>Covid19 Coronavirus Tracker Worlwide Report </h1>
+        <button style={{cursor:'pointer'}}onClick={handlePDFcreate}>Download</button>
         <Grid 
         search={false}
-        columns={[
-                {name:"Flag",
-                 formatter: (cell) => _(<img style={{height:40, width:50}} src={cell} alt="flag" />)},
-                 "Country","Updated time","Total Cases","Total Deaths"
-                ]}
+        columns={["Country","Updated time","Total Cases","Total Deaths"]}
         server={{
             url: "https://corona.lmao.ninja/v2/countries",
-            then: data=>data.map(value=>[`${FLAG_ENDPOINT}/${getFlag(value.countryInfo.iso2)}.png`,value.country,unixConvertTime(value.updated),value.cases,value.deaths]),
+            then: data=>data.map(value=>[value.country,unixConvertTime(value.updated),value.cases,value.deaths]),
             handle: (res) => {
                 // no matching records found
                 if (res.status === 404) return {data: []};
