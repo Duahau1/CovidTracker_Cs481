@@ -19,7 +19,6 @@ body {
 }
 
 .gameModeButton {
-  margin-right: 28px;
   border-radius: 50px;
   background: #cb181d;
   white-space: nowrap;
@@ -143,5 +142,7 @@ body {
 }
 
 #freeMove {
+  margin-top: 10px;
+  margin-bottom: 10px;
   visibility: hidden;
 }
