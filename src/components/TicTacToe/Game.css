@@ -18,6 +18,25 @@ body {
   width: max-content;
 }
 
+.gameModeButton {
+  border-radius: 50px;
+  background: #cb181d;
+  white-space: nowrap;
+  padding: 10px 22px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+.gameModeButton:hover{
+    transition: all 0.2s ease-in-out;
+    background: #F1C00A;
+    color: #010606;
+}
+
 .square {
   font-family: Futura, sans-serif !important;
   border: 2px solid white;
@@ -123,5 +142,7 @@ body {
 }
 
 #freeMove {
+  margin-top: 10px;
+  margin-bottom: 10px;
   visibility: hidden;
 }
