@@ -186,7 +186,7 @@ class Board extends React.Component {
 
     return (
       <div>
-        <button className='gameModeButton' onClick={()=> this.toggleGameMode()}>{this.state.singlePlayer?"2 Player Mode":"Single Player"}</button>
+        <button className='gameModeButton' onClick={()=> this.toggleGameMode()}>Switch to {this.state.singlePlayer?"Two Player":"Single Player"}</button>
         <div id="freeMove">
           <p>You have a free move!</p>
         </div>
