@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Game.css';
 import Grid from '@material-ui/core/Grid';
+
+ // object holding the state of the game
 var outerGame = {
   innerGames: [                                          // Row-Col
     {id: 0, squares: Array(9).fill(null), winner: null}, // Top-Left
@@ -32,7 +34,7 @@ var outerGame = {
   ];
 
 /**
- *
+ * A square of a tictactoe innerGame
  * @param {*} props
  */
 function Square(props) {
@@ -44,18 +46,20 @@ function Square(props) {
   );
 }
 
-
+/**
+ * Internal class for use in <Game /> component
+ */
 class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       outerGame: outerGame,
       xIsNext: true,
+      singlePlayer: true,
     };
   }
 
   /**
-
    * Handles a move by a player determining if its valid, then if a win, then next valid innerGame
    * @param {int} innerGameId The game that was played in
    * @param {int} squareNum The square in the game clicked
@@ -65,7 +69,7 @@ class Board extends React.Component {
 
     if (//NOT the current active inner game AND NOT a free move?
         (innerGameId !== outerGame.activeInnerGameId && outerGame.activeInnerGameId !== 99)
-  //SOME CHECKS BELOW THIS COMMENT MAY BE UNNECESSARY BASED ON LOGIC OF activeGameId, WILL TEST ONCE WORKING
+   //SOME CHECKS BELOW THIS COMMENT MAY BE UNNECESSARY BASED ON LOGIC OF activeGameId, WILL TEST ONCE WORKING
         ||outerGame.winner //outer game won
         || outerGame.innerGames[innerGameId].winner //this inner game is won
         || outerGame.innerGames[innerGameId].squares[squareNum] //this inner game square already taken
@@ -105,7 +109,25 @@ class Board extends React.Component {
     this.setState({
       outerGame: outerGame,
       xIsNext: !this.state.xIsNext, //flip the turn to the next player
+    },
+    () => {
+      // if it is now O's turn (aka the computer) and single player mode is chosen (bool)
+      // then call computer move function?
+      if(!this.state.xIsNext && this.state.singlePlayer){
+        console.log("0's turn: "+!this.state.xIsNext);
+        // Step 1: figure out an open move
+        var compMove = calcComputersMove(this.state.outerGame);
+        // Step 2: recursively call handleClick with previously saved open move in step 1
+        this.handleClick(compMove.inGmID, compMove.sqrNum);
+      }
     });
+
+  }
+
+  toggleGameMode(){
+    this.setState({
+      singlePlayer: !this.state.singlePlayer,
+    })
   }
 
   /**
@@ -122,7 +144,7 @@ class Board extends React.Component {
       />
     );
   }
-
+  
   render() {
     const winner = this.state.outerGame.winner
     let status;
@@ -164,6 +186,7 @@ class Board extends React.Component {
 
     return (
       <div>
+        <button className='gameModeButton' onClick={()=> this.toggleGameMode()}>{this.state.singlePlayer?"2 Player Mode":"Single Player"}</button>
         <div class="game-board">
           {spans}
         </div>
@@ -175,6 +198,9 @@ class Board extends React.Component {
   }
 }
 
+/**
+ * Exported class that renders the Game in a Grid
+ */
 export default class Game extends React.Component {
   render() {
     return (
@@ -193,6 +219,30 @@ ReactDOM.render(
 // ==========================================
 // ||           HELPER FUNCTIONS           ||
 // ==========================================
+
+/**
+ * Calculate the computers move randomly, accounting for free move
+ * return object with necessary values to call handleClick
+ */
+function calcComputersMove(outerGM){
+  var arg1 = outerGM.activeInnerGameId; // inGmID
+  var arg2 = -1; // sqrNum
+    // computer has free move
+    if(arg1 === 99){
+      var temp;
+      do { // find an open innerGameId and save in arg1
+        temp = Math.floor(Math.random()*9); // get a number 0-8 inclusive
+      }while(outerGM.innerGames[temp].winner) // loop until we get an inner game w/ winner == null
+      arg1 = temp;
+    }
+    // find the square in the chosen game
+    do{
+      arg2=Math.floor(Math.random()*9); // 0-8 inclusive
+    }while(outerGM.innerGames[arg1].squares[arg2]) // loop until we get a square that is unclaimed/"null"
+  
+  return {inGmID: arg1, sqrNum: arg2};
+}
+
 /**
  * Calculate the winner of an inner game
  * @param {array} innerGameSquares
@@ -209,6 +259,10 @@ function calcInnerWinner(innerGameSquares) {
   return null; // there is no winner
 }
 
+/**
+ * Determines if an innerGame is a tie by checking for null values
+ * @param {*} innerGameSquares 
+ */
 function calcTie(innerGameSquares) {
   for (let i = 0; i < innerGameSquares.length; i++) {
     if (innerGameSquares[i] == null) {
@@ -237,6 +291,11 @@ function calcOuterWinner(outerGame){
 
 }
 
+/**
+ * Makes an innerGame appear disabled
+ * @param {*} gameId 
+ * @param {*} winner 
+ */
 function disableInnerGame(gameId, winner) {
   const nodes = document.getElementById(getGameId(gameId)).getElementsByTagName('*');
   document.getElementById(getGameId(gameId)).style.background = "rgba(255, 255, 255, 0.3)";
@@ -249,6 +308,12 @@ function disableInnerGame(gameId, winner) {
   winnerMarker.style.visibility = "visible";
 }
 
+/**
+ * Helps next player know which innerGame they must play in
+ * @param {*} previous 
+ * @param {*} next 
+ * @param {*} winner 
+ */
 function displayNextMove(previous, next, winner) {
   if (previous !== 99) {
     const previousGame = document.getElementById(getGameId(previous));
@@ -267,6 +332,11 @@ function displayNextMove(previous, next, winner) {
   }
 }
 
+/**
+ * Helps players see what the last move of the opponent that was made
+ * @param {*} gameId 
+ * @param {*} squareNum 
+ */
 function displayLastMove(gameId, squareNum) {
   // Clear out old "last move"
   for (var j = 0; j < 9; j++) {
