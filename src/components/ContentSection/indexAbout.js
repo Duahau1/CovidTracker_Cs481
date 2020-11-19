@@ -36,6 +36,11 @@ const AboutContentSection = ({
             <ContentWrapper>
                 <ContentRow imgStart={imgStart}>
                     <Column1>
+                    <ImgWrap>
+                    <Img  src={img} alt={alt} />
+                    </ImgWrap>
+                    </Column1>
+                    <Column2>
                     <TextWrapper>
                         <TopLine>{topLine}</TopLine>
                         <Heading lightText={lightText}>{headline}</Heading>
@@ -53,11 +58,6 @@ const AboutContentSection = ({
                             >{buttonLabel}</AboutBtnLink>
                         </BtnWrap>
                     </TextWrapper>
-                    </Column1>
-                    <Column2>
-                    <ImgWrap>
-                    <Img  src={img} alt={alt} />
-                    </ImgWrap>
                     </Column2>
                 </ContentRow>
             </ContentWrapper>
