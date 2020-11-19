@@ -9,7 +9,8 @@ import {
     NavMenu, 
     NavItem, 
     NavLinks, 
-    NavBtn, 
+    NavBtn,
+    Img, 
     NavBtnLink} from './NavbarElements';
 
 
@@ -36,15 +37,25 @@ const Navbar = ({toggle}) => {
         <>
           <Nav scrollNav={scrollNav}>
               <NavBarContainer>
-                  <NavLogo to="/" onClick={toggleHome}>PKVA</NavLogo>
+                  <NavLogo to="/" onClick={toggleHome}><Img src= {require("../../images/Logo.png")} width="130" height="50"/></NavLogo>
                   <MobileIcon onClick={toggle}>
                       <FaBars />
                   </MobileIcon>
                   <NavMenu>
-                      <NavItem>
-                          <NavLinks to="covid" 
+                  <NavItem>
+                          <NavLinks to="/" onClick={toggleHome}
                           smooth={true} duration={500} spy={true}
-                          exact='true' offset={-80}>COVID19</NavLinks>
+                          exact='true' offset={-80}>Home</NavLinks>
+                      </NavItem>
+                      <NavItem>
+                          <NavLinks to="globe" 
+                          smooth={true} duration={500} spy={true}
+                          exact='true' offset={-80}>Globe Map</NavLinks>
+                      </NavItem>
+                      <NavItem>
+                          <NavLinks to="usa" 
+                          smooth={true} duration={500} spy={true}
+                          exact='true' offset={-80}>USA Map</NavLinks>
                       </NavItem>
                       <NavItem>
                           <NavLinks to="tictactoe"
@@ -58,9 +69,9 @@ const Navbar = ({toggle}) => {
                       </NavItem>
                   </NavMenu>
                   <NavBtn>
-                      <NavBtnLink to='/signin'
+                      <NavBtnLink 
                       smooth={true} duration={500} spy={true}
-                      exact='true' offset={-80}>Sign In</NavBtnLink>
+                      exact='true' offset={-80}></NavBtnLink>
                   </NavBtn>
               </NavBarContainer>
           </Nav>

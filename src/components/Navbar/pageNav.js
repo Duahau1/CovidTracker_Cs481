@@ -9,7 +9,8 @@ import {
     NavMenu, 
     NavItem, 
     PageNavLinks, 
-    NavBtn, 
+    NavBtn,
+    Img, 
     NavBtnLink} from './NavbarElements';
 
 
@@ -36,7 +37,7 @@ const PageNavbar = ({toggle}) => {
         <>
           <Nav scrollNav={scrollNav}>
               <NavBarContainer>
-                  <NavLogo to="/" onClick={toggleHome}>PKVA</NavLogo>
+              <NavLogo to="/" onClick={toggleHome}><Img src= {require("../../images/Logo.png")} width="130" height="42"/></NavLogo>
                   <MobileIcon onClick={toggle}>
                       <FaBars />
                   </MobileIcon>
@@ -68,9 +69,9 @@ const PageNavbar = ({toggle}) => {
                       </NavItem>
                   </NavMenu>
                   <NavBtn>
-                      <NavBtnLink to='/signin'
+                      <NavBtnLink
                       smooth={true} duration={500} spy={true}
-                      exact='true' offset={-80}>Sign In</NavBtnLink>
+                      exact='true' offset={-80}></NavBtnLink>
                   </NavBtn>
               </NavBarContainer>
           </Nav>

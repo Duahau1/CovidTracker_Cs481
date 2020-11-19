@@ -52,7 +52,7 @@ export const TextWrapper = styled.div`
 `
 
 export const TopLine = styled.p`
-    color: #932108;
+    color: #FF2E00;
     font-size: 16px;
     line-height: 16px;
     font-weight: 700;
@@ -91,10 +91,31 @@ export const BtnWrap = styled.div`
 export const BtnLink = styled(LinkR)`
     margin-right: 28px;
     border-radius: 50px;
-    background: #932108;
+    background: #FF2E00;
     white-space: nowrap;
     padding: 10px 22px;
-    color: #010606;
+    color: #FFFFFF;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+
+    &:hover{
+        transition: all 0.2s ease-in-out;
+        background: #F1C00A;
+        color: #010606;
+    }
+`
+
+export const AboutBtnLink = styled.a`
+    margin-right: 28px;
+    border-radius: 50px;
+    background: #FF2E00;
+    white-space: nowrap;
+    padding: 10px 22px;
+    color: #FFFFFF;
     font-size: 16px;
     outline: none;
     border: none;

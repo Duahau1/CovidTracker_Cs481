@@ -17,13 +17,12 @@ const Sidebar = ({isOpen, toggle}) => {
             </Icon>
             <SidebarWrapper>
                 <SidebarMenu>
-                    <SidebarLink to="covid" onClick={toggle}>Covid19</SidebarLink>
+                    <SidebarLink to="globe" onClick={toggle}>Globe Map</SidebarLink>
+                    <SidebarLink to="usa" onClick={toggle}>USA Map</SidebarLink>
                     <SidebarLink to="tictactoe" onClick={toggle}>TicTacToe</SidebarLink>
                     <SidebarLink to="about" onClick={toggle}>About Us</SidebarLink>
                 </SidebarMenu>
-                <SideBtnWrap>
-                    <SidebarRoute to='/signin'>Sign In</SidebarRoute>
-                </SideBtnWrap>
+                
             </SidebarWrapper>
         </SidebarContainer>
     )
