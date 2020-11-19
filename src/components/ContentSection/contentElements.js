@@ -94,7 +94,7 @@ export const BtnLink = styled(LinkR)`
     background: #FF2E00;
     white-space: nowrap;
     padding: 10px 22px;
-    color: #010606;
+    color: #FFFFFF;
     font-size: 16px;
     outline: none;
     border: none;
@@ -115,7 +115,7 @@ export const AboutBtnLink = styled.a`
     background: #FF2E00;
     white-space: nowrap;
     padding: 10px 22px;
-    color: #010606;
+    color: #FFFFFF;
     font-size: 16px;
     outline: none;
     border: none;

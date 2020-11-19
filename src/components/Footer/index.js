@@ -53,15 +53,15 @@ const Footer = () => {
                         <SocialLogo to='/' onClick={toggleHome}>Covid19 Tracker</SocialLogo>
                         <WebsiteRights> PKVA © {new Date().getFullYear()}All Rights Reserved.</WebsiteRights>
                         <SocialIcons>
-                            <SocialIconLink href="/" target="_blank"
+                            <SocialIconLink href="https://www.facebook.com/" target="_blank"
                             aria-label="Facebook">
                                 <FaFacebook />
                             </SocialIconLink>
-                            <SocialIconLink href="/" target="_blank"
+                            <SocialIconLink href="https://www.instagram.com/" target="_blank"
                             aria-label="Instagram">
                                 <FaInstagram />
                             </SocialIconLink>
-                            <SocialIconLink href="/" target="_blank"
+                            <SocialIconLink href="https://www.linkedin.com/" target="_blank"
                             aria-label="Linkedin">
                                 <FaLinkedin />
                             </SocialIconLink>
