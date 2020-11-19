@@ -130,7 +130,7 @@ export const AboutBtnLink = styled.a`
     }
 `
 
-export const ImgWrap = styled.div`
+export const ImgWrap = styled(LinkR)`
     max-width: 555px;
     height: 100%;
 `
