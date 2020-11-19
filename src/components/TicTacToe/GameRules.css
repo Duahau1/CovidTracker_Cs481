@@ -53,13 +53,13 @@
 }
 
 .help {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .helpContainer {
   position: relative;
   margin-left: -40px;
-  margin-top: 460px;
+  margin-top: 485px;
 }
 
 .close:hover {
