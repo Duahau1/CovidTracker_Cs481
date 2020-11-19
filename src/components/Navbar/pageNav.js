@@ -37,7 +37,7 @@ const PageNavbar = ({toggle}) => {
         <>
           <Nav scrollNav={scrollNav}>
               <NavBarContainer>
-              <NavLogo to="/" onClick={toggleHome}><Img src= {require("../../images/Logo.png")} width="130" height="42"/></NavLogo>
+              <NavLogo to="/" onClick={toggleHome}><Img src= {require("../../images/Logo.png")} width="130" height="50"/></NavLogo>
                   <MobileIcon onClick={toggle}>
                       <FaBars />
                   </MobileIcon>
