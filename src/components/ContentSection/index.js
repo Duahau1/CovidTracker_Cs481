@@ -17,7 +17,8 @@ Img} from './contentElements'
 const ContentSection = ({
     lightBg, 
     id,
-    linkOne, 
+    linkOne,
+    imgLink, 
     imgStart, 
     topLine, 
     lightText,
@@ -55,7 +56,7 @@ const ContentSection = ({
                     </TextWrapper>
                     </Column1>
                     <Column2>
-                    <ImgWrap>
+                    <ImgWrap to={imgLink}>
                     <Img  src={img} alt={alt} />
                     </ImgWrap>
                     </Column2>

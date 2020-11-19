@@ -1,6 +1,7 @@
 export const homeObjectOneGlobe = {
     id: 'globe',
     linkOne: '/globe',
+    imgLink: '/globe',
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
@@ -18,6 +19,7 @@ export const homeObjectOneGlobe = {
 export const homeObjectOneUSA = {
     id: 'usa',
     linkOne: '/usa',
+    imgLink: '/usa',
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
@@ -34,6 +36,7 @@ export const homeObjectOneUSA = {
 export const homeObjectTwo = {
     id: 'tictactoe',
     linkOne: '/tictactoe',
+    imgLink: '/tictactoe',
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
@@ -42,7 +45,7 @@ export const homeObjectTwo = {
     description: 'Play an entertaining game of our version of Ultimate Tic Tac Toe while visiting this page.',
     buttonLabel: 'T^3 Game',
     imgStart: false,
-    img: require('../../images/covid2.jpg'),
+    img: require('../../images/tic.png'),
     dark: true,
     primary: true,
     darkText: false
@@ -50,6 +53,7 @@ export const homeObjectTwo = {
 export const homeObjectThree = {
     id: 'about',
     linkOne: '/aboutUs',
+    imgLink: '/aboutUs',
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
